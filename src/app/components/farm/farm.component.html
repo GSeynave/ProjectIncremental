@@ -1,0 +1,10 @@
+<div *ngIf="!farmActif; else elseBlock">
+  <span>Farm en pause.</span>
+  <button (click)="farming()">Démarrer farm</button>
+  <app-lifebar [farmActif]="false" hidden></app-lifebar>
+</div>
+<ng-template #elseBlock>
+  <span>Farm en cours.</span> <br>
+  <app-lifebar [farmActif]="farmActif" [personnage]="personnage" [zone]="zone"></app-lifebar>
+  <button (click)="farming()">Arrêter farm</button>
+</ng-template>

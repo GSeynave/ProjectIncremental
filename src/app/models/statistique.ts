@@ -1,0 +1,20 @@
+export class Statistique {
+  id: number = 0;
+  vie: number = 0;
+  force: number = 0;
+  intelligence: number = 0;
+  agilite: number = 0;
+  chance: number = 0;
+  sagesse: number = 0;
+  initiative: number = 0;
+  pa: number = 0;
+  pm: number = 0;
+  po: number = 0;
+  energie: number = 0;
+  critiqueChance: number = 0;
+  critiqueDommage: number = 0;
+  resistanceTerre: number = 0;
+  resistanceFeu: number = 0;
+  resistanceAir: number = 0;
+  resistanceEau: number = 0;
+}
