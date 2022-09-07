@@ -1,27 +1,65 @@
-# DofusIncremental
+# Dofus incremental
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.
+## Principe du jeu
 
-## Development server
+Dans ce jeu incrémental, vous retrouvez l'univers du monde des Douze.
+Ils vous faudrat venir à bout de tous les donjons afin de pouvoir gravir les étages des songes et de devenir de plus en plus fort.
+Pour cela, vous devrez naviguer entre les métiers et le farm de ressources pour créer vos équipements.
+N'ayez crainte, dès lors que la progression devient trop difficile, vous pourrez profitez du système de songes pour repartir de zéro en échange d'ogrine.
+Vous pourrez donc acheter et profiter des pouvoirs des idoles.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+---
 
-## Code scaffolding
+## Equipements
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Les équipements sont le coeur de votre progression, mettez tout en place pour mettre la main sur les meilleurs d'entre eux.
 
-## Build
+---
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Dofus
 
-## Running unit tests
+Venez à bout des boss mythique du jeu pour obtenir les si rares Dofus.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+## Songes infini
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Les songes vont permettront de grimper les étages à chaque fin d'aventure, afin d'en commencer une nouvelle, toujours plus périlleuse.
 
-## Further help
+---
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Métiers
+
+Les métiers vous offrirons des options de management afin de vous focaliser sur ce dont vous avez besoin pour vos prochaines sessions de farm. Faites bon usage de vos pods.
+
+---
+
+## Combats
+
+Les combats sont automatiques et vous permettent d edropper des ressources sur chacuns des monstres. Choississez votre zone de farm selon vos besoins.
+
+---
+
+## Team
+
+Le farm étant le coeur du jeu, nous avons pensez à vous qui jouez en team ou solo avec des amis. Le système de groupe vous permettra de générer plus de ressources simultanément.
+
+---
+
+## Guilde
+
+Toujours pas satisfait de votre groupe ? Pensez à rejoindre ou créer une guilde et profitez du système de percepteur pouvant récupérer des ressources pour chaque membres de la guilde farmant dans la zone.
+
+
+
+## A venir..
+
+- Système de personnage
+- Système de combat
+- Système de métiers
+- Système de songes
+- Système de zones / monstres
+- Système d'équipements
+- Système de dofus
+- Schéma BDD
+- Architecture projet
