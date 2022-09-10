@@ -1,0 +1,32 @@
+mat-card {
+  margin-top: 6px;
+}
+
+mat-card-title {
+  text-align: center;
+}
+
+mat-card-content {
+  display: flex;
+}
+
+app-ressource {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.resistance-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.ressource-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.ressource {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+}

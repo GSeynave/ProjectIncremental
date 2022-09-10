@@ -1,0 +1,21 @@
+<mat-card>
+  <mat-card-title>{{monstre.nom}}</mat-card-title>
+
+  <mat-card-content>
+    <div class="resistance-content">
+      <span>
+        Resistances
+      </span>
+      <app-resistances [idStatistique]="monstre.idStatistique"></app-resistances>
+    </div>
+    <div class="ressource-content">
+      <span>
+        Ressources
+      </span>
+
+      <div class="ressource">
+        <app-ressource [ressource]="ressource" *ngFor="let ressource of ressources"> </app-ressource>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
