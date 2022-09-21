@@ -1,4 +1,4 @@
-<!-- <app-farm></app-farm> -->
+<app-farm [zoneTeleport]="zoneTeleport"></app-farm>
 <mat-card>
-  <app-zaap></app-zaap>
+  <app-zaap (zoneTeleport)="utiliserZaap($event)"></app-zaap>
 </mat-card>

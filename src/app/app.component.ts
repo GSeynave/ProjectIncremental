@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Zone } from './models/zone';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'DofusIncremental';
+
+  zoneTeleport: Zone = new Zone();
+  utiliserZaap(zoneTeleport: Zone){
+    this.zoneTeleport = zoneTeleport;
+  }
 }

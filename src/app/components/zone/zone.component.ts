@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Zone } from 'src/app/models/zone';
 
 @Component({
@@ -9,9 +9,13 @@ import { Zone } from 'src/app/models/zone';
 export class ZoneComponent implements OnInit {
 
   @Input('zone') zone: Zone = new Zone();
+  @Output() zoneTeleport: EventEmitter<Zone> = new EventEmitter<Zone>();
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  utiliserZaap(zoneTeleport: Zone){
+    this.zoneTeleport.emit(zoneTeleport);
+  }
 }
