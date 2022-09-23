@@ -1,0 +1,11 @@
+<section class="liste-farm-personnage">
+  <app-personnage-farm [zoneTeleport]="zoneTeleport"></app-personnage-farm>
+</section>
+<mat-card>
+  <app-zaap (zoneTeleport)="utiliserZaap($event)"></app-zaap>
+</mat-card>
+<mat-card>
+  <h2>Inventaire</h2>
+    <app-inventaire></app-inventaire>
+</mat-card>
+<app-equipment></app-equipment>

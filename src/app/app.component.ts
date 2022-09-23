@@ -8,9 +8,4 @@ import { Zone } from './models/zone';
 })
 export class AppComponent {
   title = 'DofusIncremental';
-
-  zoneTeleport: Zone = new Zone();
-  utiliserZaap(zoneTeleport: Zone){
-    this.zoneTeleport = zoneTeleport;
-  }
 }

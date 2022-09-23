@@ -1,5 +1,6 @@
 export class Statistique {
   id: number = 0;
+  niveau: number = 0;
   vie: number = 0;
   force: number = 0;
   intelligence: number = 0;

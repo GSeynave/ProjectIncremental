@@ -1,0 +1,37 @@
+h2 {
+  text-align: center;
+  font-size: medium;
+}
+
+.entite-container {
+  width: 500px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.personnage-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.personnage-informations {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.monstre-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.monstre-informations {
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

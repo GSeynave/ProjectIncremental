@@ -1,10 +1,22 @@
-<div *ngIf="!farmActif; else elseBlock">
-  <span>Farm en pause.</span>
-  <button (click)="farming()">Démarrer farm</button>
-  <app-lifebar [farmActif]="false" hidden></app-lifebar>
-</div>
-<ng-template #elseBlock>
-  <span>Farm en cours.</span> <br>
-  <app-lifebar [farmActif]="farmActif" [personnage]="personnage" [zoneTeleport]="zoneTeleport"></app-lifebar>
-  <button (click)="farming()">Arrêter farm</button>
-</ng-template>
+<section class="farm-container" *ngIf="zoneTeleport.id != 0; else elseBlock">
+  <h2>{{zoneTeleport.nom}}</h2>
+  <section class="entite-container">
+    <article class="personnage-container">
+      <aside><img src="../../../assets/classe/ecaflip.png" width="53" height="116"></aside>
+      <article class="personnage-informations">
+        <span>{{personnage.nom}} <b>Lv.{{statistiquePersonnage.niveau}}</b></span>
+        <mat-progress-bar id="viePersonnage" [value]="viePersonnage" ></mat-progress-bar>
+      </article>
+    </article>
+    <span class="vs"> VS </span>
+    <article class="monstre-container">
+      <article class="monstre-informations">
+        <span>{{monstreActuel.nom}} <b>Lv.{{statistiqueMonstre.niveau}}</b></span> <br>
+        <span>{{vieMonstre | number}} / {{statistiqueMonstre.vie}}</span>
+        <mat-progress-bar id="vieMonstre" [value]="getVieMonstre()"></mat-progress-bar>
+      </article>
+      <aside><img src="../../../assets//monstre/moskito.png"></aside>
+    </article>
+  </section>
+</section>
+<ng-template #elseBlock>Aucun farm en cours</ng-template>

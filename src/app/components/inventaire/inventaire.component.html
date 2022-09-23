@@ -1,0 +1,26 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <h2>Inventaire Ressources</h2>
+  </mat-expansion-panel-header>
+  <section class="inventaire-ressource-container">
+    <span *ngFor="let ressource of inventaireRessource">{{ressource.ressource.nom}} : x{{ressource.quantite}}</span>
+  </section>
+</mat-expansion-panel>
+
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <h2>Inventaire Equipements</h2>
+  </mat-expansion-panel-header>
+  <section class="inventaire-equipement-container">
+    <!-- <span *ngFor="let ressource of inventaireRessource">{{ressource.ressource.nom}} : x{{ressource.quantite}}</span> -->
+  </section>
+</mat-expansion-panel>
+
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <h2>Inventaire Consommables</h2>
+  </mat-expansion-panel-header>
+  <section class="inventaire-consommable-container">
+    <!-- <span *ngFor="let ressource of inventaireRessource">{{ressource.ressource.nom}} : x{{ressource.quantite}}</span> -->
+  </section>
+</mat-expansion-panel>
