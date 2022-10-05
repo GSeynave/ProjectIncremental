@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PersonnageFarmComponent } from './components/personnage-farm/personnage-farm.component';
 import { FarmComponent } from './components/farm/farm.component';
-import { ZaapComponent } from './components/zaap/zaap.component';
+import { PortailComponent } from './components/portail/portail.component';
 import { ZoneComponent } from './components/zone/zone.component';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,16 +24,14 @@ import { TailleurComponent } from './components/tailleur/tailleur.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatListModule} from '@angular/material/list';
-
-
-
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
     AppComponent,
     FarmComponent,
     PersonnageFarmComponent,
-    ZaapComponent,
+    PortailComponent,
     ZoneComponent,
     MonstreListeComponent,
     MonstreComponent,
@@ -55,7 +53,8 @@ import {MatListModule} from '@angular/material/list';
     MatExpansionModule,
     MatTabsModule,
     MatGridListModule,
-    MatListModule
+    MatListModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

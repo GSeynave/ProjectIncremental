@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  utiliserZaap(zoneTeleport: Zone) {
+  utiliserPortail(zoneTeleport: Zone) {
     this.zoneTeleport = zoneTeleport;
   }
 }

@@ -1,1 +1,16 @@
-<p>tailleur works!</p>
+<mat-card class="tailleur-container">
+  <mat-card-title>Lv. {{metier.niveau}}</mat-card-title>
+
+  <mat-list class="recette-liste">
+    <mat-list-item *ngFor="let recette of recettes" class="recette">
+      {{getEquipementByRecetteId(recette.id)}} Lv.{{recette.niveau}}
+      <mat-list class="ressource-liste">
+        <mat-list-item *ngFor="let ressource of recette.inventaireRessource" class="ressource">
+          {{ressource.quantite}} {{ressource.ressource.nom}}
+        </mat-list-item>
+      </mat-list>
+      <button mat-button (click)="craft(recette)">Crafter</button>
+    </mat-list-item>
+  </mat-list>
+
+</mat-card>

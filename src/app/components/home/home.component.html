@@ -2,12 +2,12 @@
   <app-personnage-farm [zoneTeleport]="zoneTeleport"></app-personnage-farm>
 </section>
 <mat-card>
-  <app-zaap (zoneTeleport)="utiliserZaap($event)"></app-zaap>
+  <app-portail (zoneTeleport)="utiliserPortail($event)"></app-portail>
 </mat-card>
 <mat-card>
   <h2>Inventaire</h2>
     <app-inventaire></app-inventaire>
 </mat-card>
-<mat-card>
+<mat-card class="metier">
   <app-metier></app-metier>
 </mat-card>

@@ -15,7 +15,7 @@ export class ZoneComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  utiliserZaap(zoneTeleport: Zone){
+  utiliserPortail(zoneTeleport: Zone){
     this.zoneTeleport.emit(zoneTeleport);
   }
 }

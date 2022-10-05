@@ -3,11 +3,11 @@ import { Zone } from 'src/app/models/zone';
 import { ZoneService } from 'src/app/services/zone.service';
 
 @Component({
-  selector: 'app-zaap',
-  templateUrl: './zaap.component.html',
-  styleUrls: ['./zaap.component.css']
+  selector: 'app-portail',
+  templateUrl: './portail.component.html',
+  styleUrls: ['./portail.component.css']
 })
-export class ZaapComponent implements OnInit {
+export class PortailComponent implements OnInit {
 
   zones: Zone[] = [];
   @Output() zoneTeleport: EventEmitter<Zone> = new EventEmitter<Zone>();
@@ -17,7 +17,7 @@ export class ZaapComponent implements OnInit {
     this.zones = this.zoneService.getZones();
   }
 
-  utiliserZaap(zoneTeleport: Zone) {
+  utiliserPortail(zoneTeleport: Zone) {
     this.zoneTeleport.emit(zoneTeleport);
   }
 }

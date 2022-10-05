@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Metier } from 'src/app/models/metier';
+import { MetierService } from 'src/app/services/metier.service';
 
 @Component({
   selector: 'app-metier',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MetierComponent implements OnInit {
 
-  constructor() { }
+  metiers: Metier[] = [];
+
+  constructor(private metierService: MetierService) { }
 
   ngOnInit(): void {
+    this.metiers = this.metierService.getMetiers();
   }
 
 }

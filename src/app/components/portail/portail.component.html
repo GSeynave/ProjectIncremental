@@ -1,0 +1,8 @@
+<mat-card class="portail-card">
+  <mat-card-title>Portail</mat-card-title>
+  <div class="card-content">
+    <mat-card-content class="zones">
+      <app-zone [zone]="zone" *ngFor="let zone of zones" (zoneTeleport)="utiliserPortail($event)"></app-zone>
+    </mat-card-content>
+  </div>
+</mat-card>

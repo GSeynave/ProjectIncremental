@@ -1,5 +1,10 @@
-
-<mat-card>
+<mat-card class="metier-card">
   <h2>Metiers</h2>
-  <app-tailleur></app-tailleur>
+  <mat-tab-group class="metiers-container">
+    <section *ngFor="let metier of metiers">
+      <mat-tab label="{{metier.nom}}">
+        <app-tailleur class="tailleur" [metier]="metier"></app-tailleur>
+      </mat-tab>
+    </section>
+  </mat-tab-group>
 </mat-card>

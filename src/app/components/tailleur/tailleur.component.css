@@ -1,0 +1,17 @@
+.tailleur-container {
+  height: fit-content;
+}
+
+.recette-liste{
+  display: flex;
+  flex-direction: column;
+}
+
+.recette {
+  height: fit-content;
+}
+
+.ressource-liste {
+  display: flex;
+  flex-direction: row;
+}

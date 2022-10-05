@@ -50,11 +50,10 @@ export class FarmComponent implements OnInit, OnChanges {
   }
 
   farm() {
-    this.statistiquePersonnage = this.statistiqueService.getStatistiqueById(this.personnage.idStatistique);
-    this.statistiqueEquipement = this.statistiqueService.getEquipementStatistiqueByPersonnage(this.personnage.id);
-
     this.getMonstreRandom();
     this.interval = setInterval(() => {
+      this.statistiquePersonnage = this.statistiqueService.getStatistiqueById(this.personnage.idStatistique);
+      this.statistiqueEquipement = this.statistiqueService.getEquipementStatistiqueByPersonnage(this.personnage.id);
       const degatInflige: number = this.farmService.getDegatAuMonstre(this.statistiquePersonnage, this.statistiqueEquipement, this.statistiqueMonstre);
       console.log('dégat infligé : ', degatInflige);
       this.vieMonstre -= degatInflige;

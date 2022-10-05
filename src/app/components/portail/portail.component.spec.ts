@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ZaapComponent } from './zaap.component';
+import { PortailComponent } from './portail.component';
 
-describe('ZaapComponent', () => {
-  let component: ZaapComponent;
-  let fixture: ComponentFixture<ZaapComponent>;
+describe('PortailComponent', () => {
+  let component: PortailComponent;
+  let fixture: ComponentFixture<PortailComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ZaapComponent ]
+      declarations: [ PortailComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ZaapComponent);
+    fixture = TestBed.createComponent(PortailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
