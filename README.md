@@ -1,4 +1,4 @@
-# Dofus incremental
+# Project incremental
 
 ## Principe du jeu
 
@@ -16,9 +16,9 @@ Les équipements sont le coeur de votre progression, mettez tout en place pour m
 
 ---
 
-## Dofus
+## Légendaire
 
-Venez à bout des boss mythique du jeu pour obtenir les si rares Dofus.
+Venez à bout des boss du jeu pour obtenir les si rares objets légendaire.
 
 ---
 
@@ -60,6 +60,6 @@ Toujours pas satisfait de votre groupe ? Pensez à rejoindre ou créer une guild
 - Système de songes
 - Système de zones / monstres
 - Système d'équipements
-- Système de dofus
+- Système de légendaire
 - Schéma BDD
 - Architecture projet

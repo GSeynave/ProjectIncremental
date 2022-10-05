@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/dofus-incremental'),
+      dir: require('path').join(__dirname, './coverage/project-incremental'),
       subdir: '.',
       reporters: [
         { type: 'html' },
