@@ -1,54 +1,54 @@
-# Dofus incremental
+# Project incremental
 
 ## Principe du jeu
 
-Dans ce jeu incrémental, vous retrouvez l'univers du monde des Douze.
-Ils vous faudrat venir à bout de tous les donjons afin de pouvoir gravir les étages des songes et de devenir de plus en plus fort.
-Pour cela, vous devrez naviguer entre les métiers et le farm de ressources pour créer vos équipements.
-N'ayez crainte, dès lors que la progression devient trop difficile, vous pourrez profitez du système de songes pour repartir de zéro en échange d'ogrine.
-Vous pourrez donc acheter et profiter des pouvoirs des idoles.
+Dans ce jeu incrémental, vous vous retrouvez dans un monde sans fin.
+Ils vous faudrat venir à bout de tous les donjons afin de pouvoir gravir les étages des mondes et devenir de plus en plus fort.
+Pour cela vous devrez mettre la main à la patte avec les métiers et le farm de ressources pour créer vos équipements.
+N’ayez craintes, à chaque étages des cendres temporelles vous seront offert pour acheter des reliques avec des puissances variées.
+Alors qu’attendez vous ? Venez farmer !
 
 ---
 
 ## Equipements
 
-Les équipements sont le coeur de votre progression, mettez tout en place pour mettre la main sur les meilleurs d'entre eux.
+Les équipements sont le coeur de votre progression, mettez tout en place pour mettre là main sur les meilleurs d’entre eux.
 
 ---
 
-## Dofus
+## Equipements légendaire
 
-Venez à bout des boss mythique du jeu pour obtenir les si rares Dofus.
+Venez mettre la main sur les équipements légendaire, attention ils sont rares et demanderont beaucoup de patience.. mais vous le savez déjà.
 
 ---
 
-## Songes infini
+## Prestige
 
-Les songes vont permettront de grimper les étages à chaque fin d'aventure, afin d'en commencer une nouvelle, toujours plus périlleuse.
+Si vous rencontrer des difficultés pour progresser dans votre monde, n’hésitez à prestiges afin de récupérer des cendres temporelles pour augmenter vos reliques.
 
 ---
 
 ## Métiers
 
-Les métiers vous offrirons des options de management afin de vous focaliser sur ce dont vous avez besoin pour vos prochaines sessions de farm. Faites bon usage de vos pods.
+Les métiers vous offrirons des options de management afin de vous focaliser sur ce dont vous avez besoin pour vos prochaines sessions de farm.
 
 ---
 
 ## Combats
 
-Les combats sont automatiques et vous permettent d edropper des ressources sur chacuns des monstres. Choississez votre zone de farm selon vos besoins.
+Les combats sont automatiques et vous permettrent de dropper des ressources sur chacuns des monstres, choississez votre zone de farm afin d’obtenir et les ressources dont vous avez besoin.
 
 ---
 
 ## Team
 
-Le farm étant le coeur du jeu, nous avons pensez à vous qui jouez en team ou solo avec des amis. Le système de groupe vous permettra de générer plus de ressources simultanément.
+Le farm étant le coeur du jeu, nous avons pensez à vous qui souhaitez toujours plus de loot. Le système de groupe vous permettra de générer plus de ressources simultanément.
 
 ---
 
 ## Guilde
 
-Toujours pas satisfait de votre groupe ? Pensez à rejoindre ou créer une guilde et profitez du système de percepteur pouvant récupérer des ressources pour chaque membres de la guilde farmant dans la zone.
+Toujours pas satisfait de votre groupe ? Vous voulez toujours plus..? Pensez aux collecteur, rejoigner ou créer une alliance et profiter des drops de percepteurs pour chaques membres qui farm dans la zone.
 
 
 
@@ -60,6 +60,6 @@ Toujours pas satisfait de votre groupe ? Pensez à rejoindre ou créer une guild
 - Système de songes
 - Système de zones / monstres
 - Système d'équipements
-- Système de dofus
+- Système de légendaire
 - Schéma BDD
 - Architecture projet
