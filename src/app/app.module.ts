@@ -19,7 +19,8 @@ import { HomeComponent } from './components/home/home.component';
 import { InventaireComponent } from './components/inventaire/inventaire.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { EquipmentComponent } from './components/equipment/equipment.component';
+import { MetierComponent } from './components/metier/metier.component';
+import { TailleurComponent } from './components/tailleur/tailleur.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { EquipmentComponent } from './components/equipment/equipment.component';
     ResistancesComponent,
     HomeComponent,
     InventaireComponent,
-    EquipmentComponent,
+    MetierComponent,
+    TailleurComponent,
   ],
   imports: [
     BrowserModule,

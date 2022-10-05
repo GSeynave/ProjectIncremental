@@ -7,5 +7,5 @@ import { Zone } from './models/zone';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'DofusIncremental';
+  title = 'ProjectIncremental';
 }

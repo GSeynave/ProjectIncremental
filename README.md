@@ -16,9 +16,9 @@ Les équipements sont le coeur de votre progression, mettez tout en place pour m
 
 ---
 
-## Equipements légendaire
+## Légendaire
 
-Venez mettre la main sur les équipements légendaire, attention ils sont rares et demanderont beaucoup de patience.. mais vous le savez déjà.
+Venez à bout des boss du jeu pour obtenir les si rares objets légendaire.
 
 ---
 
