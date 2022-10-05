@@ -1,26 +1,26 @@
-<mat-expansion-panel>
-  <mat-expansion-panel-header>
-    <h2>Inventaire Ressources</h2>
-  </mat-expansion-panel-header>
-  <section class="inventaire-ressource-container">
-    <span *ngFor="let ressource of inventaireRessource">{{ressource.ressource.nom}} : x{{ressource.quantite}}</span>
-  </section>
-</mat-expansion-panel>
-
-<mat-expansion-panel>
-  <mat-expansion-panel-header>
-    <h2>Inventaire Equipements</h2>
-  </mat-expansion-panel-header>
-  <section class="inventaire-equipement-container">
-    <!-- <span *ngFor="let ressource of inventaireRessource">{{ressource.ressource.nom}} : x{{ressource.quantite}}</span> -->
-  </section>
-</mat-expansion-panel>
-
-<mat-expansion-panel>
-  <mat-expansion-panel-header>
-    <h2>Inventaire Consommables</h2>
-  </mat-expansion-panel-header>
+<mat-tab-group mat-stretch-tabs>
+  <mat-tab label="Equipement">
+    <section class="inventaire-equipement-container">
+      <mat-grid-list cols="5" rowHeight="5:1">
+        <mat-grid-tile *ngFor="let equipement of inventaireEquipement">{{equipement.nom}} : x{{equipement.quantite}}</mat-grid-tile>
+      </mat-grid-list>
+    </section>
+  </mat-tab>
+  <mat-tab label="Consommable"></mat-tab>
   <section class="inventaire-consommable-container">
-    <!-- <span *ngFor="let ressource of inventaireRessource">{{ressource.ressource.nom}} : x{{ressource.quantite}}</span> -->
+    <mat-grid-list cols="5" rowHeight="5:1">
+      <!-- <mat-grid-tile *ngFor="let ressource of inventaireRessource">{{ressource.ressource.nom}} : x{{ressource.quantite}}</mat-grid-tile> -->
+    </mat-grid-list>
   </section>
-</mat-expansion-panel>
+  <mat-tab label="Ressource">
+    <section class="inventaire-ressource-container">
+      <mat-grid-list cols="8" rowHeight="5:1">
+        <mat-grid-tile *ngFor="let ressource of inventaireRessource">
+          <mat-card class="inventaire-ressource-card">
+            <app-ressource [ressource]="ressource.ressource" [quantite]="ressource.quantite"></app-ressource>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </section>
+  </mat-tab>
+</mat-tab-group>

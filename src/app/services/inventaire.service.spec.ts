@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { InventaireRessourceService } from './inventaire-ressource.service';
+import { InventaireService } from './inventaire.service';
 
 describe('InventaireRessourceService', () => {
-  let service: InventaireRessourceService;
+  let service: InventaireService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(InventaireRessourceService);
+    service = TestBed.inject(InventaireService);
   });
 
   it('should be created', () => {

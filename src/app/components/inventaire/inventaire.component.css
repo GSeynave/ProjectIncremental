@@ -1,7 +1,6 @@
 h2{
   text-align: center;
 }
-.inventaire-ressource-container{
-  display: flex;
-  flex-direction: column;
+.inventaire-ressource-card{
+  background-color: grey;
 }

@@ -1,7 +1,7 @@
 <mat-card class="zaap-card">
   <mat-card-title>Zaap</mat-card-title>
   <div class="card-content">
-    <mat-card-content >
+    <mat-card-content class="zones">
       <app-zone [zone]="zone" *ngFor="let zone of zones" (zoneTeleport)="utiliserZaap($event)"></app-zone>
     </mat-card-content>
   </div>

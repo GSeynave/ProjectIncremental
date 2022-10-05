@@ -5,7 +5,7 @@ import { Ressource } from 'src/app/models/ressource';
 import { Statistique } from 'src/app/models/statistique';
 import { Zone } from 'src/app/models/zone';
 import { FarmService } from 'src/app/services/farm.service';
-import { InventaireRessourceService } from 'src/app/services/inventaire-ressource.service';
+import { InventaireService } from 'src/app/services/inventaire.service';
 import { MonstreService } from 'src/app/services/monstre.service';
 import { RessourceService } from 'src/app/services/ressource.service';
 import { StatistiqueService } from 'src/app/services/statistique.service';
@@ -23,9 +23,10 @@ export class FarmComponent implements OnInit, OnChanges {
   vieMonstre: number = 0;
   monstreActuel: Monstre = new Monstre();
   statistiquePersonnage: Statistique = new Statistique();
+  statistiqueEquipement: Statistique = new Statistique();
   statistiqueMonstre: Statistique = new Statistique();
   interval: ReturnType<typeof setInterval> | undefined;
-  constructor(private farmService: FarmService, private monstreService: MonstreService, private statistiqueService: StatistiqueService, private ressourceService: RessourceService, private inventaireRessourceService: InventaireRessourceService) { }
+  constructor(private farmService: FarmService, private monstreService: MonstreService, private statistiqueService: StatistiqueService, private ressourceService: RessourceService, private inventaireService: InventaireService) { }
 
   ngOnInit(): void {
   }
@@ -33,7 +34,6 @@ export class FarmComponent implements OnInit, OnChanges {
   initFarm() {
     if (this.zoneTeleport.id != 0) {
       this.clearFarm();
-      this.statistiquePersonnage = this.statistiqueService.getStatistiqueById(this.personnage.idStatistique);
       this.farm();
     }
   }
@@ -50,10 +50,13 @@ export class FarmComponent implements OnInit, OnChanges {
   }
 
   farm() {
-    this.statistiquePersonnage.force = 50;
+    this.statistiquePersonnage = this.statistiqueService.getStatistiqueById(this.personnage.idStatistique);
+    this.statistiqueEquipement = this.statistiqueService.getEquipementStatistiqueByPersonnage(this.personnage.id);
+
     this.getMonstreRandom();
     this.interval = setInterval(() => {
-      const degatInflige: number = this.farmService.getDegatAuMonstre(this.statistiquePersonnage, this.statistiqueMonstre);
+      const degatInflige: number = this.farmService.getDegatAuMonstre(this.statistiquePersonnage, this.statistiqueEquipement, this.statistiqueMonstre);
+      console.log('dégat infligé : ', degatInflige);
       this.vieMonstre -= degatInflige;
       (<HTMLInputElement>document.getElementById('vieMonstre')).value = ( (100 * this.vieMonstre) / this.statistiqueMonstre.vie).toFixed(1);
       if (this.vieMonstre <= 0) {
@@ -74,7 +77,7 @@ export class FarmComponent implements OnInit, OnChanges {
     let ressources: Ressource[] = this.ressourceService.getRessourcesByMonstreId(this.monstreActuel.id);
     ressources.forEach((ressource) => {
       if (Math.floor(Math.random() * 100) < ressource.tauxDrop) {
-        this.inventaireRessourceService.updateInventaireRessource(ressource, 1);
+        this.inventaireService.updateInventaireRessource(ressource, 1);
       }
     });
   }

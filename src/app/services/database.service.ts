@@ -15,10 +15,10 @@ export class DatabaseService {
   getStatistiqueById(id: number): Statistique {
     let statistiquePersonnage: Statistique = new Statistique();
     statistiquePersonnage.id = 1;
-    statistiquePersonnage.force = 1;
-    statistiquePersonnage.intelligence = 1;
-    statistiquePersonnage.agilite = 1;
-    statistiquePersonnage.chance = 1;
+    statistiquePersonnage.terre = 1;
+    statistiquePersonnage.feu = 1;
+    statistiquePersonnage.air = 1;
+    statistiquePersonnage.eau = 1;
     statistiquePersonnage.resistanceTerre = 2;
     statistiquePersonnage.resistanceFeu = 0;
     statistiquePersonnage.resistanceAir = 0;
@@ -27,10 +27,10 @@ export class DatabaseService {
     let statistiqueMonstre1: Statistique = new Statistique();
     statistiqueMonstre1.id = 1;
     statistiqueMonstre1.vie = 12;
-    statistiqueMonstre1.force = 10;
-    statistiqueMonstre1.intelligence = 1;
-    statistiqueMonstre1.agilite = 1;
-    statistiqueMonstre1.chance = 1;
+    statistiqueMonstre1.terre = 10;
+    statistiqueMonstre1.feu = 1;
+    statistiqueMonstre1.air = 1;
+    statistiqueMonstre1.eau = 1;
     statistiqueMonstre1.resistanceTerre = 25;
     statistiqueMonstre1.resistanceFeu = 0;
     statistiqueMonstre1.resistanceAir = 0;
@@ -39,10 +39,10 @@ export class DatabaseService {
     let statistiqueMonstre2: Statistique = new Statistique();
     statistiqueMonstre2.id = 2;
     statistiqueMonstre2.vie = 12;
-    statistiqueMonstre2.force = 1;
-    statistiqueMonstre2.intelligence = 1;
-    statistiqueMonstre2.agilite = 1;
-    statistiqueMonstre2.chance = 10;
+    statistiqueMonstre2.terre = 1;
+    statistiqueMonstre2.feu = 1;
+    statistiqueMonstre2.air = 1;
+    statistiqueMonstre2.eau = 10;
     statistiqueMonstre2.resistanceTerre = 0;
     statistiqueMonstre2.resistanceFeu = 0;
     statistiqueMonstre2.resistanceAir = 0;
@@ -65,13 +65,13 @@ export class DatabaseService {
       ressource1.id = 1;
       ressource1.idMonstre = 1;
       ressource1.idZone = 1;
-      ressource1.nom = "Plume de Piou Jaune";
+      ressource1.nom = "Ongle d\'orc";
       ressource1.tauxDrop = 35;
       let ressource2: Ressource = new Ressource();
       ressource2.id = 1;
       ressource2.idMonstre = 1;
       ressource2.idZone = 1;
-      ressource2.nom = "Graine de sesame";
+      ressource2.nom = "Poils d\'orc";
       ressource2.tauxDrop = 5;
 
       if (this.isDrop(ressource1.tauxDrop)) {
@@ -85,13 +85,13 @@ export class DatabaseService {
       ressource1.id = 2;
       ressource1.idMonstre = 2;
       ressource1.idZone = 1;
-      ressource1.nom = "Plume de Piou Bleu";
+      ressource1.nom = "Os de squelette";
       ressource1.tauxDrop = 35;
       let ressource2: Ressource = new Ressource();
       ressource2.id = 1;
       ressource2.idMonstre = 1;
       ressource2.idZone = 1;
-      ressource2.nom = "Graine de sesame";
+      ressource2.nom = "Dent de squelette";
       ressource2.tauxDrop = 5;
       if (this.isDrop(ressource1.tauxDrop)) {
         ressources.push(ressource1);
@@ -115,17 +115,23 @@ export class DatabaseService {
     let monstres: Monstre[] = [];
     let monstre1: Monstre = new Monstre();
     monstre1.id = 1;
-    monstre1.nom = "Piou jaune";
+    monstre1.nom = "Orc";
     monstre1.idStatistique = 2;
     monstre1.idZone = 1;
     let monstre2: Monstre = new Monstre();
     monstre2.id = 2;
-    monstre2.nom = "Piou bleu";
+    monstre2.nom = "Squelette";
+    monstre2.idStatistique = 3;
+    monstre2.idZone = 1;
+    let monstre3: Monstre = new Monstre();
+    monstre2.id = 3;
+    monstre2.nom = "Phenix";
     monstre2.idStatistique = 3;
     monstre2.idZone = 1;
 
     monstres.push(monstre1);
     monstres.push(monstre2);
+    monstres.push(monstre3);
 
     return monstres;
   }

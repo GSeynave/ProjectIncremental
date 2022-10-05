@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="monstre-container">
   <mat-card-title>{{monstre.nom}}</mat-card-title>
 
   <mat-card-content>
@@ -6,16 +6,16 @@
       <span>
         Resistances
       </span>
-      <app-resistances [idStatistique]="monstre.idStatistique"></app-resistances>
+      <app-resistances [idStatistique]="monstre.idStatistique" class="resistance-item"></app-resistances>
     </div>
     <div class="ressource-content">
       <span>
         Ressources
       </span>
 
-      <div class="ressource">
-        <app-ressource [ressource]="ressource" *ngFor="let ressource of ressources"> </app-ressource>
-      </div>
+      <mat-list class="ressource">
+        <mat-list-item ><app-ressource [ressource]="ressource" *ngFor="let ressource of ressources"> </app-ressource></mat-list-item>
+      </mat-list>
     </div>
   </mat-card-content>
 </mat-card>

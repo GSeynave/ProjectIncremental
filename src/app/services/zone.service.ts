@@ -13,13 +13,13 @@ export class ZoneService {
     let zones: Zone[] = [];
     let zone1: Zone = new Zone();
     zone1.id = 1;
-    zone1.nom = 'Village d\'Astrub';
+    zone1.nom = 'Cimietière hanté';
     let zone2: Zone = new Zone();
     zone2.id = 2;
-    zone2.nom = 'Coin des bouftous';
+    zone2.nom = 'Forêt enchantée';
     let zone3: Zone = new Zone();
     zone3.id = 3;
-    zone3.nom = 'Contour d\'Astrub';
+    zone3.nom = 'Plaine devastée';
     zones.push(zone1);
     zones.push(zone2);
     zones.push(zone3);

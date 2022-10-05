@@ -1,19 +1,14 @@
-<div class="resistance-content">
-
-  <span>
-    <img src="../../../assets/resistance/terre.png" />
-    {{statistique.resistanceTerre}}%
-  </span>
-  <span>
-    <img src="../../../assets/resistance/feu.png" />
-    {{statistique.resistanceFeu}}%
-  </span>
-  <span>
-    <img src="../../../assets/resistance/air.png" />
-    {{statistique.resistanceAir}}%
-  </span>
-  <span>
-    <img src="../../../assets/resistance/eau.png" />
-    {{statistique.resistanceEau}}%
-  </span>
-</div>
+<mat-grid-list cols="2" rowHeight="3:1">
+  <mat-grid-tile class="terre">
+    Terre : {{statistique.resistanceTerre}}%
+  </mat-grid-tile>
+  <mat-grid-tile class="feu">
+    Feu : {{statistique.resistanceFeu}}%
+  </mat-grid-tile>
+  <mat-grid-tile class="air">
+    Air : {{statistique.resistanceAir}}%
+  </mat-grid-tile>
+  <mat-grid-tile class="eau">
+    Eau : {{statistique.resistanceEau}}%
+  </mat-grid-tile>
+</mat-grid-list>

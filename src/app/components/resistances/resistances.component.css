@@ -1,4 +1,15 @@
-.resistance-content {
-  display: flex;
-  justify-content: space-between;
+.terre {
+  color: rgb(140, 50, 5)
+}
+
+.feu {
+  color: rgb(190, 0, 0)
+}
+
+.air {
+  color: rgb(15, 130, 0)
+}
+
+.eau {
+  color: rgb(0, 5, 140)
 }

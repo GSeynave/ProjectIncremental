@@ -21,6 +21,12 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MetierComponent } from './components/metier/metier.component';
 import { TailleurComponent } from './components/tailleur/tailleur.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatListModule} from '@angular/material/list';
+
+
+
 
 @NgModule({
   declarations: [
@@ -46,7 +52,10 @@ import { TailleurComponent } from './components/tailleur/tailleur.component';
     MatTooltipModule,
     MatCardModule,
     MatProgressBarModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTabsModule,
+    MatGridListModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

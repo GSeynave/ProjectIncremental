@@ -1,3 +1,3 @@
-<div matTooltip="taux de drop {{ressource.tauxDrop}}%">
-  <img [src]="getRessourceIcone()"/>
-</div>
+<section matTooltip="taux de drop {{ressource.tauxDrop}}%">
+  {{ressource.nom}} {{quantite > 0 ? quantite : ''}}
+</section>

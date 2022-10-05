@@ -16,8 +16,7 @@ app-ressource {
 }
 
 .resistance-content {
-  display: flex;
-  flex-direction: column;
+  width: 50%;
 }
 
 .ressource-content {
@@ -28,5 +27,10 @@ app-ressource {
 .ressource {
   margin-top: 5px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+}
+
+.monstre-container {
+  background-color: rgb(180, 180, 180);
 }

@@ -2,3 +2,12 @@ mat-card{
   text-align: center;
   margin: 15px;
 }
+
+.zone-card {
+  width: 100%;
+  background-color: rgb(76, 106, 121);
+}
+
+.monstres-liste {
+  width: 100%;
+}
