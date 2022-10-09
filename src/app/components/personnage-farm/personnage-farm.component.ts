@@ -2,7 +2,6 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { Personnage } from 'src/app/models/personnage';
 import { Zone } from 'src/app/models/zone';
 import { PersonnageService } from 'src/app/services/personnage.service';
-import { Region } from 'src/app/utils/region';
 
 @Component({
   selector: 'app-personnage-farm',
