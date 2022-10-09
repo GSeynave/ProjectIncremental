@@ -25,6 +25,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatListModule} from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
+import { EquipmentComponent } from './components/equipment/equipment.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,8 @@ import {MatTableModule} from '@angular/material/table';
     InventaireComponent,
     MetierComponent,
     TailleurComponent,
+    EquipmentComponent,
+
   ],
   imports: [
     BrowserModule,
