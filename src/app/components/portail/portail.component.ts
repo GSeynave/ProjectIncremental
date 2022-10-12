@@ -10,14 +10,9 @@ import { ZoneService } from 'src/app/services/zone.service';
 export class PortailComponent implements OnInit {
 
   zones: Zone[] = [];
-  @Output() zoneTeleport: EventEmitter<Zone> = new EventEmitter<Zone>();
   constructor(private zoneService: ZoneService) { }
 
   ngOnInit(): void {
     this.zones = this.zoneService.getZones();
-  }
-
-  utiliserPortail(zoneTeleport: Zone) {
-    this.zoneTeleport.emit(zoneTeleport);
   }
 }

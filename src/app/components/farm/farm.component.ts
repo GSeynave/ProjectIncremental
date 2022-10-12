@@ -9,6 +9,7 @@ import { InventaireService } from 'src/app/services/inventaire.service';
 import { MonstreService } from 'src/app/services/monstre.service';
 import { RessourceService } from 'src/app/services/ressource.service';
 import { StatistiqueService } from 'src/app/services/statistique.service';
+import { ZoneService } from 'src/app/services/zone.service';
 
 @Component({
   selector: 'app-farm',
@@ -18,7 +19,7 @@ import { StatistiqueService } from 'src/app/services/statistique.service';
 export class FarmComponent implements OnInit, OnChanges {
 
   @Input() personnage: Personnage = new Personnage();
-  @Input() zoneTeleport: Zone = new Zone();
+  @Input() zoneId: number = 0;
   viePersonnage: number = 0;
   vieMonstre: number = 0;
   monstreActuel: Monstre = new Monstre();
@@ -26,21 +27,22 @@ export class FarmComponent implements OnInit, OnChanges {
   statistiqueEquipement: Statistique = new Statistique();
   statistiqueMonstre: Statistique = new Statistique();
   interval: ReturnType<typeof setInterval> | undefined;
-  constructor(private farmService: FarmService, private monstreService: MonstreService, private statistiqueService: StatistiqueService, private ressourceService: RessourceService, private inventaireService: InventaireService) { }
+  constructor(private farmService: FarmService, private monstreService: MonstreService, private statistiqueService: StatistiqueService, private ressourceService: RessourceService, private inventaireService: InventaireService, private zoneService: ZoneService) { }
 
   ngOnInit(): void {
+    this.initFarm();
   }
 
   initFarm() {
-    if (this.zoneTeleport.id != 0) {
+    if (this.zoneId != 0) {
       this.clearFarm();
       this.farm();
     }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['zoneTeleport'] && changes['zoneTeleport'].currentValue != changes['zoneTeleport'].previousValue) {
-      this.zoneTeleport = changes['zoneTeleport'].currentValue;
+    if (changes['zoneId'] && changes['zoneId'].currentValue != changes['zoneId'].previousValue) {
+      this.zoneId= changes['zoneId'].currentValue;
       this.initFarm();
     }
 
@@ -66,7 +68,7 @@ export class FarmComponent implements OnInit, OnChanges {
   }
 
   getMonstreRandom() {
-    let monstres: Monstre[] = this.monstreService.getMonstresByZoneId(this.zoneTeleport.id);
+    let monstres: Monstre[] = this.monstreService.getMonstresByZoneId(this.zoneId);
     this.monstreActuel = monstres[Math.floor(Math.random() * monstres.length)];
     this.statistiqueMonstre = this.statistiqueService.getStatistiqueById(this.monstreActuel.idStatistique);
     this.vieMonstre = this.statistiqueMonstre.vie;
@@ -89,5 +91,9 @@ export class FarmComponent implements OnInit, OnChanges {
 
   getVieMonstre() {
     return 100 * this.vieMonstre / this.statistiqueMonstre.vie;
+  }
+
+  getNomZone(zoneId: number) {
+    return this.zoneService.getNomZone(zoneId);
   }
 }

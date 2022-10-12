@@ -6,15 +6,21 @@ import { Personnage } from '../models/personnage';
 })
 export class PersonnageService {
 
-  constructor() { }
+  personnage: Personnage = new Personnage();
+  constructor() {
+      this.personnage.id = 1;
+      this.personnage.idStatistique = 1;
+      this.personnage.niveau = 1;
+      this.personnage.niveauOmega = 0;
+      this.personnage.nom = "ShOcK";
+      this.personnage.zoneId = 1;
+   }
 
   getPersonnageById(id: number) {
-    let personnage: Personnage = new Personnage();
-    personnage.id = id;
-    personnage.idStatistique = 1;
-    personnage.niveau = 1;
-    personnage.niveauOmega = 0;
-    personnage.nom = "ShOcK";
-    return personnage;
+    return this.personnage;
+  }
+
+  setZoneId(zoneId: number) {
+    this.personnage.zoneId = zoneId;
   }
 }

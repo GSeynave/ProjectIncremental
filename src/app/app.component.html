@@ -1,2 +1,15 @@
-<app-home></app-home>
-<span class="content">ProjectIncremental</span>
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" opened>
+    <ul>
+      <li><a routerLink="inventaire" routerLinkActive="true">Inventaire</a></li>
+      <li><a routerLink="metier" routerLinkActive="true">Metiers</a></li>
+      <li><a routerLink="portail" routerLinkActive="true">Portails</a></li>
+    </ul>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+    <section class="liste-farm-personnage">
+      <app-personnage-farm></app-personnage-farm>
+    </section>
+  </mat-drawer-content>
+</mat-drawer-container>

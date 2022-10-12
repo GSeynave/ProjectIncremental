@@ -1,5 +1,5 @@
-<section class="farm-container" *ngIf="zoneTeleport.id != 0; else elseBlock">
-  <h2>{{zoneTeleport.nom}}</h2>
+<section class="farm-container" *ngIf="zoneId != 0">
+  <h2>{{getNomZone(zoneId)}}</h2>
   <section class="entite-container">
     <article class="personnage-container">
       <article class="personnage-informations">
@@ -17,4 +17,3 @@
     </article>
   </section>
 </section>
-<ng-template #elseBlock>Aucun farm en cours</ng-template>

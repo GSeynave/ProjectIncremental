@@ -25,4 +25,15 @@ export class ZoneService {
     zones.push(zone3);
     return zones;
   }
+
+  getNomZone(zoneId: number): string {
+    if(zoneId == 1) {
+      return 'Cimetière hanté';
+    } else if (zoneId == 2) {
+      return 'Forêt enchantée';
+    } else if (zoneId == 3) {
+      return 'Plaine devastée';
+    }
+    return '';
+  }
 }
