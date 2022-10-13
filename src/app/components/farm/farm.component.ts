@@ -99,7 +99,6 @@ export class FarmComponent implements OnInit, OnChanges {
   clearFarm(): void {
     this.monstreActuel = new Monstre();
     this.statistiqueMonstre = new Statistique();
-    this.vieMonstre = 0;
     clearInterval(this.interval);
   }
 

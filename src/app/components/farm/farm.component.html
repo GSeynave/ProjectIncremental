@@ -4,6 +4,7 @@
     <article class="personnage-container">
       <article class="personnage-informations">
         <span>{{personnage.nom}} <b>Lv.{{statistiquePersonnage.niveau}}</b></span>
+        <span>{{viePersonnage | number}} / {{statistiquePersonnage.vie}}</span>
         <mat-progress-bar id="viePersonnage" [value]="getViePersonnage()"></mat-progress-bar>
       </article>
     </article>
