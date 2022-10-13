@@ -5,7 +5,7 @@
     <mat-list-item *ngFor="let recette of recettes" class="recette">
       {{getEquipementByRecetteId(recette.id)}} Lv.{{recette.niveau}}
       <mat-list class="ressource-liste">
-        <mat-list-item *ngFor="let ressource ef recette.ressources" class="ressource">
+        <mat-list-item *ngFor="let ressource of recette.ressources" class="ressource">
          {{ressource.quantite}} {{ressource.nom}}
         </mat-list-item>
       </mat-list>
