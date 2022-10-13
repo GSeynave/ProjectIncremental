@@ -30,6 +30,8 @@ export class FarmComponent implements OnInit, OnChanges {
   constructor(private farmService: FarmService, private monstreService: MonstreService, private statistiqueService: StatistiqueService, private ressourceService: RessourceService, private inventaireService: InventaireService, private zoneService: ZoneService) { }
 
   ngOnInit(): void {
+    this.statistiquePersonnage = this.statistiqueService.getStatistiqueById(50);
+    this.viePersonnage = this.statistiquePersonnage.vie;
     this.initFarm();
   }
 
@@ -42,7 +44,7 @@ export class FarmComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['zoneId'] && changes['zoneId'].currentValue != changes['zoneId'].previousValue) {
-      this.zoneId= changes['zoneId'].currentValue;
+      this.zoneId = changes['zoneId'].currentValue;
       this.initFarm();
     }
 
@@ -54,11 +56,22 @@ export class FarmComponent implements OnInit, OnChanges {
   farm() {
     this.getMonstreRandom();
     this.interval = setInterval(() => {
-      this.statistiquePersonnage = this.statistiqueService.getStatistiqueById(this.personnage.idStatistique);
+
+      this.statistiquePersonnage = this.statistiqueService.getStatistiqueById(50);
       this.statistiqueEquipement = this.statistiqueService.getEquipementStatistiqueByPersonnage(this.personnage.id);
+      console.log('stat perso:', this.statistiquePersonnage);
       const degatInflige: number = this.farmService.getDegatAuMonstre(this.statistiquePersonnage, this.statistiqueEquipement, this.statistiqueMonstre);
       this.vieMonstre -= degatInflige;
-      (<HTMLInputElement>document.getElementById('vieMonstre')).value = ( (100 * this.vieMonstre) / this.statistiqueMonstre.vie).toFixed(1);
+      console.log('degat inflige : ', degatInflige);
+
+      (<HTMLInputElement>document.getElementById('vieMonstre')).value = ((100 * this.vieMonstre) / this.statistiqueMonstre.vie).toFixed(1);
+      const degatRecu: number = this.farmService.getDegatAuPersonnage(this.statistiqueMonstre, this.statistiqueEquipement, this.statistiquePersonnage);
+      this.viePersonnage -= degatRecu;
+      console.log('degat recu: ', degatRecu);
+      (<HTMLInputElement>document.getElementById('viePersonnage')).value = ((100 * this.viePersonnage) / this.statistiquePersonnage.vie).toFixed(1);
+      if(this.viePersonnage <= 0) {
+        this.clearFarm();
+      }
       if (this.vieMonstre <= 0) {
         this.getDrop();
         this.getMonstreRandom();
@@ -86,11 +99,16 @@ export class FarmComponent implements OnInit, OnChanges {
   clearFarm(): void {
     this.monstreActuel = new Monstre();
     this.statistiqueMonstre = new Statistique();
+    this.vieMonstre = 0;
     clearInterval(this.interval);
   }
 
   getVieMonstre() {
     return 100 * this.vieMonstre / this.statistiqueMonstre.vie;
+  }
+
+  getViePersonnage() {
+    return 100 * this.viePersonnage / this.statistiquePersonnage.vie;
   }
 
   getNomZone(zoneId: number) {

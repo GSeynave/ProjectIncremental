@@ -49,7 +49,7 @@ export class MetierService {
     ressource2.id = 1;
     ressource2.idMonstre = 1;
     ressource2.idZone = 1;
-    ressource2.nom = 'Ongle d\'Orc';
+    ressource2.nom = 'Ongle d\'orc';
     recette2.ressources.push(ressource2);
     recettes.push(recette1);
     recettes.push(recette2);

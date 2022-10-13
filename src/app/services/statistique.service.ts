@@ -34,24 +34,28 @@ export class StatistiqueService {
 
     return statistique;
     }
-    statistique.id = this.getRandomStatistique(10);
-    statistique.vie = this.getRandomStatistique(20);
-    statistique.terre = this.getRandomStatistique(5);
-    statistique.feu = this.getRandomStatistique(5);
-    statistique.air = this.getRandomStatistique(5);
-    statistique.eau = this.getRandomStatistique(5);
-    statistique.sagesse = this.getRandomStatistique(5);
-    statistique.hate = this.getRandomStatistique(10);
-    statistique.puissance = this.getRandomStatistique(12);
-    statistique.dexterite = this.getRandomStatistique(6);
-    statistique.precision = this.getRandomStatistique(6);
-    statistique.energie = this.getRandomStatistique(2000);
-    statistique.critiqueChance = this.getRandomStatistique(100);
-    statistique.critiqueDommage = this.getRandomStatistique(5);
-    statistique.resistanceTerre = this.getRandomStatistique(50);
-    statistique.resistanceFeu = this.getRandomStatistique(50);
-    statistique.resistanceAir = this.getRandomStatistique(50);
-    statistique.resistanceEau = this.getRandomStatistique(50);
+
+    statistique.id = 50
+    statistique.vie = 20;
+    statistique.terre = 5,
+    statistique.feu = 5;
+    statistique.air = 5;
+    statistique.eau = 5;
+    statistique.sagesse = 5;
+    statistique.hate = 5;
+    statistique.puissance = 5;
+    statistique.dexterite = 5;
+    statistique.precision = 5;
+    statistique.energie = 5;
+    statistique.critiqueChance = 5;
+    statistique.critiqueDommage = 5;
+    statistique.resistanceTerre = 5;
+    statistique.resistanceFeu = 5;
+    statistique.resistanceAir = 5;
+    statistique.resistanceEau = 5;
+    if(id == 50) {
+      statistique.vie = 100;
+    }
     return statistique;
   }
 
