@@ -31,7 +31,7 @@ export class TailleurComponent implements OnInit {
   }
 
   craft(recette: Recette) {
-    let recetteOk: boolean = false;
+    let recetteOk: boolean = true;
     recette.ressources.forEach(ressource => {
       if (this.getQuantite(ressource) < ressource.quantite) {
         recetteOk = false;

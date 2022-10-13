@@ -25,6 +25,9 @@ export class InventaireService {
     const index = this.inventaireRessources.findIndex(ressourceInventaire => ressourceInventaire.nom === ressource.nom);
     if (index > -1) {
       this.inventaireRessources[index].quantite -= ressource.quantite;
+      if(this.inventaireRessources[index].quantite <= 0){
+        this.inventaireRessources.splice(index);
+      }
     }
   }
 
