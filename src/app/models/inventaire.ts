@@ -1,5 +1,5 @@
-import { InventaireRessource } from "./inventaire-ressource";
+import { Ressource } from "./ressource";
 
 export class Inventaire {
-  inventaireRessource: InventaireRessource[] = [];
+  ressources: Ressource[] = [];
 }

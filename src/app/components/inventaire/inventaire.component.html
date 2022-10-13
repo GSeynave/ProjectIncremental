@@ -17,7 +17,7 @@
       <mat-grid-list cols="8" rowHeight="5:1">
         <mat-grid-tile *ngFor="let ressource of inventaireRessource">
           <mat-card class="inventaire-ressource-card">
-            <app-ressource [ressource]="ressource.ressource" [quantite]="ressource.quantite"></app-ressource>
+            <app-ressource [ressource]="ressource"></app-ressource>
           </mat-card>
         </mat-grid-tile>
       </mat-grid-list>

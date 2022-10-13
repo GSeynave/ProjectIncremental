@@ -14,23 +14,23 @@ export class StatistiqueService {
     let statistique: Statistique = new Statistique();
     if (id === 22) {
     statistique.id = 22;
-    statistique.vie = 500;
-    statistique.terre = 200;
-    statistique.feu = 200;
-    statistique.air = 200;
-    statistique.eau = 200;
-    statistique.sagesse = 200;
-    statistique.hate = 200;
-    statistique.puissance = 200;
-    statistique.dexterite = 200;
-    statistique.precision = 200;
-    statistique.energie = 200;
-    statistique.critiqueChance = 200;
-    statistique.critiqueDommage = 200;
-    statistique.resistanceTerre = 200;
-    statistique.resistanceFeu = 200;
-    statistique.resistanceAir = 200;
-    statistique.resistanceEau = 200;
+    // statistique.vie = 500;
+    statistique.terre = 2;
+    // statistique.feu = 200;
+    // statistique.air = 200;
+    // statistique.eau = 200;
+    // statistique.sagesse = 200;
+    // statistique.hate = 200;
+    // statistique.puissance = 200;
+    // statistique.dexterite = 200;
+    // statistique.precision = 200;
+    // statistique.energie = 200;
+    // statistique.critiqueChance = 200;
+    // statistique.critiqueDommage = 200;
+    // statistique.resistanceTerre = 200;
+    // statistique.resistanceFeu = 200;
+    // statistique.resistanceAir = 200;
+    // statistique.resistanceEau = 200;
 
     return statistique;
     }

@@ -9,14 +9,9 @@ import { Ressource } from 'src/app/models/ressource';
 export class RessourceComponent implements OnInit {
 
   @Input('ressource') ressource: Ressource = new Ressource();
-  @Input('quantite') quantite: number = 0;
 
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  getRessourceIcone(): string{
-    return "../../../assets/ressources/" +this.ressource.nom.replace( / +/g, '').replace('\'', '') + ".png";
   }
 }

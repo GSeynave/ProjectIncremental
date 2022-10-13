@@ -4,4 +4,5 @@ export class Ressource {
   tauxDrop: number = 0;
   idZone: number = 0;
   idMonstre: number = 0;
+  quantite: number = 0;
 }

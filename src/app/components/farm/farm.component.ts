@@ -57,7 +57,6 @@ export class FarmComponent implements OnInit, OnChanges {
       this.statistiquePersonnage = this.statistiqueService.getStatistiqueById(this.personnage.idStatistique);
       this.statistiqueEquipement = this.statistiqueService.getEquipementStatistiqueByPersonnage(this.personnage.id);
       const degatInflige: number = this.farmService.getDegatAuMonstre(this.statistiquePersonnage, this.statistiqueEquipement, this.statistiqueMonstre);
-      console.log('dégat infligé : ', degatInflige);
       this.vieMonstre -= degatInflige;
       (<HTMLInputElement>document.getElementById('vieMonstre')).value = ( (100 * this.vieMonstre) / this.statistiqueMonstre.vie).toFixed(1);
       if (this.vieMonstre <= 0) {
@@ -78,7 +77,8 @@ export class FarmComponent implements OnInit, OnChanges {
     let ressources: Ressource[] = this.ressourceService.getRessourcesByMonstreId(this.monstreActuel.id);
     ressources.forEach((ressource) => {
       if (Math.floor(Math.random() * 100) < ressource.tauxDrop) {
-        this.inventaireService.updateInventaireRessource(ressource, 1);
+        ressource.quantite = 1;
+        this.inventaireService.addRessource(ressource);
       }
     });
   }
