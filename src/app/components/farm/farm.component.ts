@@ -89,7 +89,7 @@ export class FarmComponent implements OnInit, OnChanges {
   getDrop() {
     let ressources: Ressource[] = this.ressourceService.getRessourcesByMonstreId(this.monstreActuel.id);
     ressources.forEach((ressource) => {
-      if (Math.floor(Math.random() * 100) < ressource.tauxDrop) {
+      if (Math.floor(Math.random() * 100) <= ressource.tauxDrop) {
         ressource.quantite = 1;
         this.inventaireService.addRessource(ressource);
       }
