@@ -1,3 +1,7 @@
+.monstre-container{
+  background-color: rgb(0, 0, 0, 0);
+}
+
 mat-card {
   margin-top: 6px;
 }
@@ -29,8 +33,4 @@ app-ressource {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-
-.monstre-container {
-  background-color: rgb(180, 180, 180);
 }

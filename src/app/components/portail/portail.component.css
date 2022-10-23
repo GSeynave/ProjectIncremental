@@ -8,12 +8,12 @@ mat-card-content {
 }
 
 .portail-card {
-  width: 80%;
-  background-color: rgb(78, 78, 78);
+  background: radial-gradient(ellipse at top, #504343, transparent),
+            radial-gradient(ellipse at bottom, #0c5a9f, transparent);
+  width: 100%;
 }
 
 .zones {
   display: flex;
   justify-content: space-evenly;
-  background-color: rgb(133, 133, 133);
 }

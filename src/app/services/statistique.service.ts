@@ -14,44 +14,48 @@ export class StatistiqueService {
     let statistique: Statistique = new Statistique();
     if (id === 22) {
     statistique.id = 22;
-    statistique.vie = 500;
-    statistique.terre = 200;
-    statistique.feu = 200;
-    statistique.air = 200;
-    statistique.eau = 200;
-    statistique.sagesse = 200;
-    statistique.hate = 200;
-    statistique.puissance = 200;
-    statistique.dexterite = 200;
-    statistique.precision = 200;
-    statistique.energie = 200;
-    statistique.critiqueChance = 200;
-    statistique.critiqueDommage = 200;
-    statistique.resistanceTerre = 200;
-    statistique.resistanceFeu = 200;
-    statistique.resistanceAir = 200;
-    statistique.resistanceEau = 200;
+    // statistique.vie = 500;
+    statistique.terre = 2;
+    // statistique.feu = 200;
+    // statistique.air = 200;
+    // statistique.eau = 200;
+    // statistique.sagesse = 200;
+    // statistique.hate = 200;
+    // statistique.puissance = 200;
+    // statistique.dexterite = 200;
+    // statistique.precision = 200;
+    // statistique.energie = 200;
+    // statistique.critiqueChance = 200;
+    // statistique.critiqueDommage = 200;
+    // statistique.resistanceTerre = 200;
+    // statistique.resistanceFeu = 200;
+    // statistique.resistanceAir = 200;
+    // statistique.resistanceEau = 200;
 
     return statistique;
     }
-    statistique.id = this.getRandomStatistique(10);
-    statistique.vie = this.getRandomStatistique(20);
-    statistique.terre = this.getRandomStatistique(5);
-    statistique.feu = this.getRandomStatistique(5);
-    statistique.air = this.getRandomStatistique(5);
-    statistique.eau = this.getRandomStatistique(5);
-    statistique.sagesse = this.getRandomStatistique(5);
-    statistique.hate = this.getRandomStatistique(10);
-    statistique.puissance = this.getRandomStatistique(12);
-    statistique.dexterite = this.getRandomStatistique(6);
-    statistique.precision = this.getRandomStatistique(6);
-    statistique.energie = this.getRandomStatistique(2000);
-    statistique.critiqueChance = this.getRandomStatistique(100);
-    statistique.critiqueDommage = this.getRandomStatistique(5);
-    statistique.resistanceTerre = this.getRandomStatistique(50);
-    statistique.resistanceFeu = this.getRandomStatistique(50);
-    statistique.resistanceAir = this.getRandomStatistique(50);
-    statistique.resistanceEau = this.getRandomStatistique(50);
+
+    statistique.id = 50
+    statistique.vie = 20;
+    statistique.terre = 5,
+    statistique.feu = 5;
+    statistique.air = 5;
+    statistique.eau = 5;
+    statistique.sagesse = 5;
+    statistique.hate = 5;
+    statistique.puissance = 5;
+    statistique.dexterite = 5;
+    statistique.precision = 5;
+    statistique.energie = 5;
+    statistique.critiqueChance = 5;
+    statistique.critiqueDommage = 5;
+    statistique.resistanceTerre = 5;
+    statistique.resistanceFeu = 5;
+    statistique.resistanceAir = 5;
+    statistique.resistanceEau = 5;
+    if(id == 50) {
+      statistique.vie = 100;
+    }
     return statistique;
   }
 

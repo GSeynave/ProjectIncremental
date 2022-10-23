@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Zone } from 'src/app/models/zone';
+import { PersonnageService } from 'src/app/services/personnage.service';
+import { ZoneService } from 'src/app/services/zone.service';
 
 @Component({
   selector: 'app-zone',
@@ -9,13 +11,12 @@ import { Zone } from 'src/app/models/zone';
 export class ZoneComponent implements OnInit {
 
   @Input('zone') zone: Zone = new Zone();
-  @Output() zoneTeleport: EventEmitter<Zone> = new EventEmitter<Zone>();
-  constructor() { }
+  constructor(private personnageService: PersonnageService) { }
 
   ngOnInit(): void {
   }
 
   utiliserPortail(zoneTeleport: Zone){
-    this.zoneTeleport.emit(zoneTeleport);
+    this.personnageService.setZoneId(zoneTeleport.id);
   }
 }

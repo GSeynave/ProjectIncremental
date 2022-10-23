@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Equipement } from '../models/equipement';
-import { InventaireRessource } from '../models/inventaire-ressource';
 import { Ressource } from '../models/ressource';
 
 @Injectable({
@@ -8,31 +7,52 @@ import { Ressource } from '../models/ressource';
 })
 export class InventaireService {
 
-  inventaireRessources: InventaireRessource []=  [];
-  equipements: Equipement[] = [];
+  inventaireRessources: Ressource[] = [];
+  inventaireEquipements: Equipement[] = [];
   constructor() { }
 
-  updateInventaireRessource(ressource: Ressource, quantite: number) {
-    let inventaireRessource: InventaireRessource = new InventaireRessource();
-    inventaireRessource.quantite = quantite;
-    inventaireRessource.ressource = ressource;
-    this.inventaireRessources.push(inventaireRessource);
+  addRessource(ressource: Ressource) {
+    console.log('drop :', ressource);
+    const index = this.inventaireRessources.findIndex(ressourceInventaire => ressourceInventaire.nom === ressource.nom);
+    if (index > -1) {
+      this.inventaireRessources[index].quantite += ressource.quantite;
+    } else {
+      this.inventaireRessources.push(ressource);
+    }
   }
 
-  getInventaireRessource(){
+  removeRessource(ressource: Ressource) {
+    const index = this.inventaireRessources.findIndex(ressourceInventaire => ressourceInventaire.nom === ressource.nom);
+    if (index > -1) {
+      this.inventaireRessources[index].quantite -= ressource.quantite;
+      if(this.inventaireRessources[index].quantite <= 0){
+        this.inventaireRessources.splice(index);
+      }
+    }
+  }
+
+  getInventaireRessource() {
     return this.inventaireRessources;
   }
 
-  getEquipementsByPersonnageId(personnageId: number) : Equipement[] {
-    return this.equipements;
+  getQuantite(ressource: Ressource): number {
+    const index = this.inventaireRessources.findIndex(ressourceInventaire => ressourceInventaire.nom === ressource.nom);
+    if (index > -1) {
+      return this.inventaireRessources[index].quantite;
+    }
+    return 0;
   }
 
-  getInventaireEquipement() : Equipement[] {
-    return this.equipements;
+  getEquipementsByPersonnageId(personnageId: number): Equipement[] {
+    return this.inventaireEquipements;
+  }
+
+  getInventaireEquipement(): Equipement[] {
+    return this.inventaireEquipements;
   }
 
   updateInventaireEquipement(equipement: Equipement) {
-    this.equipements.push(equipement);
+    this.inventaireEquipements.push(equipement);
   }
 
 }

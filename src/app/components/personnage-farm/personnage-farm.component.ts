@@ -8,28 +8,26 @@ import { PersonnageService } from 'src/app/services/personnage.service';
   templateUrl: './personnage-farm.component.html',
   styleUrls: ['./personnage-farm.component.css']
 })
-export class PersonnageFarmComponent implements OnInit, OnChanges {
+export class PersonnageFarmComponent implements OnInit {
 
-  farmActif: boolean = false;
   personnage: Personnage = new Personnage();
-  @Input('zoneTeleport') zoneTeleport: Zone = new Zone();
+  zoneId: number = 0;
+  interval: ReturnType<typeof setInterval> | undefined;
 
   constructor(private personnageService: PersonnageService) { }
 
   ngOnInit(): void {
     this.personnage = this.personnageService.getPersonnageById(1);
-    console.log('personnage recupéré : ', this.personnage);
-  }
+    if(this.personnage.zoneId != 0 ) {
+      this.zoneId = this.personnage.zoneId;
+    }
 
-  ngOnChanges(changes: SimpleChanges): void {
-      if(changes['zoneTeleport'].currentValue != changes['zoneTeleport'].previousValue){
-        this.zoneTeleport = changes['zoneTeleport'].currentValue;
-        console.log('tp vers nouvelles zone:', this.zoneTeleport);
+    this.interval = setInterval( () => {
 
+      let zoneTemp: number = this.personnageService.getPersonnageById(1).zoneId;
+      if(this.zoneId !== zoneTemp){
+        this.zoneId = zoneTemp;
       }
-  }
-
-  farming(): void {
-    this.farmActif = !this.farmActif;
+    }, 1000);
   }
 }

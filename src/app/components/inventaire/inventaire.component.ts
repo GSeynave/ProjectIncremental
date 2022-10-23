@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { interval } from 'rxjs';
 import { Equipement } from 'src/app/models/equipement';
 import { Inventaire } from 'src/app/models/inventaire';
-import { InventaireRessource } from 'src/app/models/inventaire-ressource';
+import { Ressource } from 'src/app/models/ressource';
 import { InventaireService } from 'src/app/services/inventaire.service';
 
 @Component({
@@ -12,8 +11,7 @@ import { InventaireService } from 'src/app/services/inventaire.service';
 })
 export class InventaireComponent implements OnInit {
   interval: ReturnType<typeof setInterval> | undefined;
-  inventaire: Inventaire = new Inventaire();
-  inventaireRessource: InventaireRessource[] = [];
+  inventaireRessource: Ressource[] = [];
   inventaireEquipement: Equipement[] = [];
 
   constructor(private inventaireService: InventaireService) { }

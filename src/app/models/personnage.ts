@@ -4,4 +4,5 @@ export class Personnage {
   niveau: number = 0;
   niveauOmega: number = 0;
   idStatistique: number = 0;
+  zoneId: number = 0;
 }
