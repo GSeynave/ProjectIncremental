@@ -9,7 +9,6 @@ import { Monstre } from 'src/app/models/monstre';
 import { Personnage } from 'src/app/models/personnage';
 import { Ressource } from 'src/app/models/ressource';
 import { Statistique } from 'src/app/models/statistique';
-import { Zone } from 'src/app/models/zone';
 import { FarmService } from 'src/app/services/farm.service';
 import { InventaireService } from 'src/app/services/inventaire.service';
 import { MonstreService } from 'src/app/services/monstre.service';
@@ -50,6 +49,7 @@ export class FarmComponent implements OnInit, OnChanges {
   initFarm() {
     if (this.zoneId != 0) {
       this.clearFarm();
+      this.getMonstreRandom();
       this.farm();
     }
   }
@@ -72,49 +72,79 @@ export class FarmComponent implements OnInit, OnChanges {
   }
 
   farm() {
-    this.getMonstreRandom();
     this.interval = setInterval(() => {
-      this.farmIntervalTick();
+      this.roundIntervalTick();
     }, 1000);
   }
 
-  farmIntervalTick(): void {
+  roundIntervalTick(): void {
+    this.updateStatitistique();
+    this.attackToMonstre();
+    this.attackToPersonnage();
+    this.endRoundCheck();
+  }
+
+  endRoundCheck(): void {
+    if (this.viePersonnage <= 0) {
+      this.mortPersonnageTrt();
+    } else if (this.vieMonstre <= 0) {
+      this.mortMonstreTrt();
+    }
+  }
+
+  updateStatitistique(): void {
     this.statistiquePersonnage = this.statistiqueService.getStatistiqueById(50);
     this.statistiqueEquipement =
       this.statistiqueService.getEquipementStatistiqueByPersonnage(
         this.personnage.id
       );
-    console.log('stat perso:', this.statistiquePersonnage);
-    const degatInflige: number = this.farmService.getDegatAuMonstre(
+  }
+
+  attackToMonstre(): void {
+    const degatInflige: number = this.getDegatPersonnage();
+    this.vieMonstre -= degatInflige;
+    this.updateLifeHtmlEntity(
+      'vieMonstre',
+      this.vieMonstre,
+      this.statistiqueMonstre.vie
+    );
+  }
+
+  getDegatPersonnage(): number {
+    return this.farmService.getDegatAuMonstre(
       this.statistiquePersonnage,
       this.statistiqueEquipement,
       this.statistiqueMonstre
     );
-    this.vieMonstre -= degatInflige;
-    console.log('degat inflige : ', degatInflige);
+  }
 
-    (<HTMLInputElement>document.getElementById('vieMonstre')).value = (
-      (100 * this.vieMonstre) /
-      this.statistiqueMonstre.vie
+  updateLifeHtmlEntity(
+    idHtml: string,
+    vieEntity: number,
+    vieMaxEntity: number
+  ): void {
+    (<HTMLInputElement>document.getElementById(idHtml)).value = (
+      (100 * vieEntity) /
+      vieMaxEntity
     ).toFixed(1);
-    const degatRecu: number = this.farmService.getDegatAuPersonnage(
+  }
+
+  attackToPersonnage(): void {
+    const degatRecu = this.getDegatMonstre();
+    this.viePersonnage -= degatRecu;
+    this.updateLifeHtmlEntity(
+      'viePersonnage',
+      this.viePersonnage,
+      this.statistiquePersonnage.vie
+    );
+  }
+
+  getDegatMonstre() {
+    return this.farmService.getDegatAuPersonnage(
       this.statistiqueMonstre,
       this.statistiqueEquipement,
       this.statistiquePersonnage
     );
-    this.viePersonnage -= degatRecu;
-    console.log('degat recu: ', degatRecu);
-    (<HTMLInputElement>document.getElementById('viePersonnage')).value = (
-      (100 * this.viePersonnage) /
-      this.statistiquePersonnage.vie
-    ).toFixed(1);
-    if (this.viePersonnage <= 0) {
-      this.clearFarm();
-    }
-    if (this.vieMonstre <= 0) {
-      this.getDrop();
-      this.getMonstreRandom();
-    }
   }
 
   getMonstreRandom() {
@@ -143,6 +173,15 @@ export class FarmComponent implements OnInit, OnChanges {
     this.monstreActuel = new Monstre();
     this.statistiqueMonstre = new Statistique();
     clearInterval(this.interval);
+  }
+
+  mortPersonnageTrt(): void {
+    this.clearFarm();
+  }
+
+  mortMonstreTrt(): void {
+    this.getDrop();
+    this.getMonstreRandom();
   }
 
   getPercentVieMonstre() {
