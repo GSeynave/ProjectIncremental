@@ -6,18 +6,17 @@ import { RessourceService } from 'src/app/services/ressource.service';
 @Component({
   selector: 'app-monstre',
   templateUrl: './monstre.component.html',
-  styleUrls: ['./monstre.component.css']
+  styleUrls: ['./monstre.component.css'],
 })
 export class MonstreComponent implements OnInit {
-
   @Input('monstre') monstre: Monstre = new Monstre();
 
   ressources: Ressource[] = [];
-  constructor(private ressourceService: RessourceService) { }
+  constructor(private ressourceService: RessourceService) {}
 
   ngOnInit(): void {
-    this.ressources = this.ressourceService.getRessourcesByMonstreId(this.monstre.id);
+    this.ressources = this.ressourceService.getRessourcesByMonstreId(
+      this.monstre.id
+    );
   }
-
-
 }
