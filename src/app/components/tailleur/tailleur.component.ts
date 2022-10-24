@@ -64,6 +64,10 @@ export class TailleurComponent implements OnInit {
     });
   }
   getQuantiteInInventaire(ressource: Ressource): number {
-    return this.inventaireService.getQuantite(ressource);
+    let quantite: number = 0;
+    this.inventaireService
+      .getQuantite(ressource)
+      .subscribe((data) => (quantite = data));
+    return quantite;
   }
 }

@@ -5,6 +5,7 @@ import {
   TestBed,
   tick,
 } from '@angular/core/testing';
+import { Observable, of } from 'rxjs';
 import { Equipement } from 'src/app/models/equipement';
 import { Ressource } from 'src/app/models/ressource';
 import { InventaireService } from 'src/app/services/inventaire.service';
@@ -44,11 +45,11 @@ describe('InventaireComponent', () => {
     let spyRessource = spyOn(
       inventaireService,
       'getInventaireRessource'
-    ).and.returnValue(ressources);
+    ).and.returnValue(of(ressources));
     let spyEquipement = spyOn(
       inventaireService,
       'getInventaireEquipement'
-    ).and.returnValue(equipements);
+    ).and.returnValue(of(equipements));
     fixture.detectChanges();
     tick(1000);
     expect(component.inventaireRessource.length).toEqual(1);

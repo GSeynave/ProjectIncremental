@@ -7,20 +7,23 @@ import { InventaireService } from 'src/app/services/inventaire.service';
 @Component({
   selector: 'app-inventaire',
   templateUrl: './inventaire.component.html',
-  styleUrls: ['./inventaire.component.css']
+  styleUrls: ['./inventaire.component.css'],
 })
 export class InventaireComponent implements OnInit {
   interval: ReturnType<typeof setInterval> | undefined;
   inventaireRessource: Ressource[] = [];
   inventaireEquipement: Equipement[] = [];
 
-  constructor(private inventaireService: InventaireService) { }
+  constructor(private inventaireService: InventaireService) {}
 
   ngOnInit(): void {
     this.interval = setInterval(() => {
-      this.inventaireRessource = this.inventaireService.getInventaireRessource();
-      this.inventaireEquipement = this.inventaireService.getInventaireEquipement();
+      this.inventaireService.getInventaireRessource().subscribe((data) => {
+        this.inventaireRessource = data;
+      });
+      this.inventaireService.getInventaireEquipement().subscribe((data) => {
+        this.inventaireEquipement = data;
+      });
     }, 100);
   }
-
 }

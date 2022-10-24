@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
 import { Equipement } from 'src/app/models/equipement';
 import { Recette } from 'src/app/models/recette';
 import { Ressource } from 'src/app/models/ressource';
@@ -57,7 +58,7 @@ describe('TailleurComponent', () => {
     let spyInventaireService = spyOn(
       inventaireService,
       'getQuantite'
-    ).and.returnValue(ressource.quantite);
+    ).and.returnValue(of(ressource.quantite));
     component.getQuantiteInInventaire(ressource);
     expect(spyInventaireService).toHaveBeenCalledTimes(1);
     expect(component.getQuantiteInInventaire(ressource)).toEqual(
