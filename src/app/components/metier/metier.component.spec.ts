@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
 import { Metier } from 'src/app/models/metier';
 import { MetierService } from 'src/app/services/metier.service';
 
@@ -28,7 +29,7 @@ describe('MetierComponent', () => {
   it('should get metiers list on init', () => {
     let metiers: Metier[] = [];
     const spyMetierService = spyOn(metierService, 'getMetiers').and.returnValue(
-      metiers
+      of(metiers)
     );
     component.ngOnInit();
     expect(spyMetierService).toHaveBeenCalled();

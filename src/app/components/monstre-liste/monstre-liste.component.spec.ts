@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
+import { Monstre } from 'src/app/models/monstre';
 import { MonstreService } from 'src/app/services/monstre.service';
 
 import { MonstreListeComponent } from './monstre-liste.component';
@@ -25,7 +27,11 @@ describe('MonstreListeComponent', () => {
   });
 
   it('should get monstres liste on ngOnInit', () => {
-    const spyMonstreService = spyOn(monstreService, 'getMonstresByZoneId');
+    let monstres: Monstre[] = [];
+    const spyMonstreService = spyOn(
+      monstreService,
+      'getMonstresByZoneId'
+    ).and.returnValue(of(monstres));
     component.ngOnInit();
     expect(spyMonstreService).toHaveBeenCalledTimes(1);
   });

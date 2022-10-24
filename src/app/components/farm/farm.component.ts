@@ -95,15 +95,20 @@ export class FarmComponent implements OnInit, OnChanges {
   }
 
   updateStatitistique(): void {
-    this.statistiquePersonnage = this.statistiqueService.getStatistiqueById(50);
-    this.statistiqueEquipement =
-      this.statistiqueService.getEquipementStatistiqueByPersonnage(
-        this.personnage.id
-      );
-    this.statistiquePersonnageGlobale = this.statistiqueService.addStatistiques(
-      this.statistiquePersonnage,
-      this.statistiqueMonstre
-    );
+    this.statistiqueService.getStatistiqueById(50).subscribe((data) => {
+      this.statistiquePersonnage = data;
+      this.statistiqueService
+        .getEquipementStatistiqueByPersonnage(this.personnage.id)
+        .subscribe((data) => {
+          this.statistiqueEquipement = data;
+          this.statistiqueService
+            .addStatistiques(
+              this.statistiquePersonnage,
+              this.statistiqueMonstre
+            )
+            .subscribe((data) => (this.statistiquePersonnageGlobale = data));
+        });
+    });
   }
 
   attackToMonstre(): void {
@@ -144,19 +149,22 @@ export class FarmComponent implements OnInit, OnChanges {
   }
 
   getMonstreRandom() {
-    let monstres: Monstre[] = this.monstreService.getMonstresByZoneId(
-      this.zoneId
-    );
+    let monstres: Monstre[] = [];
+    this.monstreService
+      .getMonstresByZoneId(this.zoneId)
+      .subscribe((data) => (monstres = data));
     this.monstreActuel = monstres[Math.floor(Math.random() * monstres.length)];
-    this.statistiqueMonstre = this.statistiqueService.getStatistiqueById(
-      this.monstreActuel.idStatistique
-    );
+    this.statistiqueService
+      .getStatistiqueById(this.monstreActuel.idStatistique)
+      .subscribe((data) => (this.statistiqueMonstre = data));
     this.vieMonstre = this.statistiqueMonstre.vie;
   }
 
   getDrop() {
-    let ressources: Ressource[] =
-      this.ressourceService.getRessourcesByMonstreId(this.monstreActuel.id);
+    let ressources: Ressource[] = [];
+    this.ressourceService
+      .getRessourcesByMonstreId(this.monstreActuel.id)
+      .subscribe((data) => (ressources = data));
     ressources.forEach((ressource) => {
       if (Math.floor(Math.random() * 100) <= ressource.tauxDrop) {
         ressource.quantite = 1;

@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
+import { Zone } from 'src/app/models/zone';
 import { ZoneService } from 'src/app/services/zone.service';
 
 import { PortailComponent } from './portail.component';
@@ -25,7 +27,10 @@ describe('PortailComponent', () => {
   });
 
   it('should get zone on init', () => {
-    let spyZoneService = spyOn(zoneService, 'getZones');
+    let zones: Zone[] = [];
+    let spyZoneService = spyOn(zoneService, 'getZones').and.returnValue(
+      of(zones)
+    );
     component.ngOnInit();
     expect(spyZoneService).toHaveBeenCalledTimes(1);
   });

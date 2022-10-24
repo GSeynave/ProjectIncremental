@@ -32,7 +32,11 @@ describe('TailleurComponent', () => {
   });
 
   it('should get recette on init', () => {
-    let spyMetierService = spyOn(metierService, 'getRecetteByMetierId');
+    let recettes: Recette[] = [];
+    let spyMetierService = spyOn(
+      metierService,
+      'getRecetteByMetierId'
+    ).and.returnValue(of(recettes));
     component.ngOnInit();
     expect(spyMetierService).toHaveBeenCalledTimes(1);
   });
@@ -45,7 +49,7 @@ describe('TailleurComponent', () => {
     let spyMetierService = spyOn(
       metierService,
       'getEquipementByRecetteId'
-    ).and.returnValue(equipement);
+    ).and.returnValue(of(equipement));
     expect(component.getEquipementByRecetteId(recetteId)).toEqual(
       equipement.nom
     );
@@ -80,7 +84,7 @@ describe('TailleurComponent', () => {
     let spyMetierService = spyOn(
       metierService,
       'getEquipementByRecetteId'
-    ).and.returnValue(equipement);
+    ).and.returnValue(of(equipement));
     let spyInventaireserviceInventaireEquipement = spyOn(
       inventaireService,
       'updateInventaireEquipement'
@@ -152,7 +156,7 @@ describe('TailleurComponent', () => {
     let spyMetierService = spyOn(
       metierService,
       'getEquipementByRecetteId'
-    ).and.returnValue(equipement);
+    ).and.returnValue(of(equipement));
     let spyInventaireService = spyOn(
       inventaireService,
       'updateInventaireEquipement'

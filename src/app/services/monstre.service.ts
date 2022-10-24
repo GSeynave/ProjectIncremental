@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Monstre } from '../models/monstre';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MonstreService {
+  constructor() {}
 
-  constructor() { }
-
-  getMonstresByZoneId(zoneId: number): Monstre[] {
+  getMonstresByZoneId(zoneId: number): Observable<Monstre[]> {
     let monstres: Monstre[] = [];
     let monstre1: Monstre = new Monstre();
     let monstre2: Monstre = new Monstre();
@@ -56,7 +56,6 @@ export class MonstreService {
     monstres.push(monstre1);
     monstres.push(monstre2);
     monstres.push(monstre3);
-    return monstres;
-
+    return of(monstres);
   }
 }

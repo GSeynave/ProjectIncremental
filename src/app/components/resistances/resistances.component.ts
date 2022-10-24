@@ -5,16 +5,16 @@ import { StatistiqueService } from 'src/app/services/statistique.service';
 @Component({
   selector: 'app-resistances',
   templateUrl: './resistances.component.html',
-  styleUrls: ['./resistances.component.css']
+  styleUrls: ['./resistances.component.css'],
 })
 export class ResistancesComponent implements OnInit {
-
   @Input('idStatistique') idStatistique: number = 0;
   statistique: Statistique = new Statistique();
-  constructor(private statistiqueService: StatistiqueService) { }
+  constructor(private statistiqueService: StatistiqueService) {}
 
   ngOnInit(): void {
-    this.statistique = this.statistiqueService.getStatistiqueById(this.idStatistique);
+    this.statistiqueService
+      .getStatistiqueById(this.idStatistique)
+      .subscribe((data) => (this.statistique = data));
   }
-
 }

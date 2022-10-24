@@ -6,6 +6,7 @@ import {
   TestBed,
   tick,
 } from '@angular/core/testing';
+import { of } from 'rxjs';
 import { Monstre } from 'src/app/models/monstre';
 import { Personnage } from 'src/app/models/personnage';
 import { Ressource } from 'src/app/models/ressource';
@@ -51,10 +52,10 @@ describe('FarmComponent', () => {
   it('should get personnage statistique', () => {
     personnageStatistique.vie = 5555;
     spyOn(statistiqueService, 'getStatistiqueById').and.returnValue(
-      personnageStatistique
+      of(personnageStatistique)
     );
     spyOn(statistiqueService, 'addStatistiques').and.returnValue(
-      personnageStatistique
+      of(personnageStatistique)
     );
     const spyInitFarm = spyOn(component, 'initFarm');
     component.ngOnInit();
@@ -98,7 +99,7 @@ describe('FarmComponent', () => {
     let monstre2: Monstre = generateMonstre(2, 'monstre2', 2, 1);
     monstres.push(monstre1);
     monstres.push(monstre2);
-    spyOn(monstreService, 'getMonstresByZoneId').and.returnValue(monstres);
+    spyOn(monstreService, 'getMonstresByZoneId').and.returnValue(of(monstres));
     component.getMonstreRandom();
     expect(monstres.includes(component.monstreActuel)).toBeTrue;
   });
@@ -137,7 +138,7 @@ describe('FarmComponent', () => {
     ressources.push(ressource1);
     ressources.push(ressource2);
     spyOn(ressourceService, 'getRessourcesByMonstreId').and.returnValue(
-      ressources
+      of(ressources)
     );
     let spyInventaireService = spyOn(inventaireService, 'addRessource');
     component.getDrop();
@@ -215,12 +216,13 @@ describe('FarmComponent', () => {
     expect(component.statistiqueEquipement.vie).toBe(10);
     statPerso.vie = 50;
     statEquip.vie = 25;
-    spyOn(statistiqueService, 'getStatistiqueById').and.returnValue(statPerso);
+    spyOn(statistiqueService, 'getStatistiqueById').and.returnValue(
+      of(statPerso)
+    );
     spyOn(
       statistiqueService,
       'getEquipementStatistiqueByPersonnage'
-    ).and.returnValue(statEquip);
-
+    ).and.returnValue(of(statEquip));
     component.updateStatitistique();
     expect(component.statistiquePersonnage.vie).toBe(50);
     expect(component.statistiqueEquipement.vie).toBe(25);

@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
+import { Statistique } from 'src/app/models/statistique';
 import { InventaireService } from 'src/app/services/inventaire.service';
 import { StatistiqueService } from 'src/app/services/statistique.service';
 
@@ -28,7 +30,11 @@ describe('ResistancesComponent', () => {
   });
 
   it('should get statistique on init', () => {
-    let spyStatistiqueService = spyOn(statistiqueService, 'getStatistiqueById');
+    let statistique: Statistique = new Statistique();
+    let spyStatistiqueService = spyOn(
+      statistiqueService,
+      'getStatistiqueById'
+    ).and.returnValue(of(statistique));
     component.ngOnInit();
     expect(spyStatistiqueService).toHaveBeenCalledTimes(1);
   });

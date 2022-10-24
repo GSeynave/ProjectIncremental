@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Zone } from '../models/zone';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ZoneService {
+  constructor() {}
 
-  constructor() { }
-
-  getZones() : Zone[] {
-
+  getZones(): Observable<Zone[]> {
     let zones: Zone[] = [];
     let zone1: Zone = new Zone();
     zone1.id = 1;
@@ -23,17 +22,18 @@ export class ZoneService {
     zones.push(zone1);
     zones.push(zone2);
     zones.push(zone3);
-    return zones;
+    return of(zones);
   }
 
-  getNomZone(zoneId: number): string {
-    if(zoneId == 1) {
-      return 'Cimetière hanté';
+  getNomZone(zoneId: number): Observable<string> {
+    let zone: string = '';
+    if (zoneId == 1) {
+      zone = 'Cimetière hanté';
     } else if (zoneId == 2) {
-      return 'Forêt enchantée';
+      zone = 'Forêt enchantée';
     } else if (zoneId == 3) {
-      return 'Plaine devastée';
+      zone = 'Plaine devastée';
     }
-    return '';
+    return of(zone);
   }
 }

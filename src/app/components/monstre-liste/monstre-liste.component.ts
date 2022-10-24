@@ -13,6 +13,8 @@ export class MonstreListeComponent implements OnInit {
   constructor(private monstreService: MonstreService) {}
 
   ngOnInit(): void {
-    this.monstres = this.monstreService.getMonstresByZoneId(this.zoneId);
+    this.monstreService
+      .getMonstresByZoneId(this.zoneId)
+      .subscribe((data) => (this.monstres = data));
   }
 }

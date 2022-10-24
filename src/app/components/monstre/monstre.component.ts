@@ -15,8 +15,8 @@ export class MonstreComponent implements OnInit {
   constructor(private ressourceService: RessourceService) {}
 
   ngOnInit(): void {
-    this.ressources = this.ressourceService.getRessourcesByMonstreId(
-      this.monstre.id
-    );
+    this.ressourceService
+      .getRessourcesByMonstreId(this.monstre.id)
+      .subscribe((data) => (this.ressources = data));
   }
 }

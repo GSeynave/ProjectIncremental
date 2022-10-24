@@ -22,12 +22,16 @@ export class TailleurComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.recettes = this.metierService.getRecetteByMetierId(this.metier.id);
+    this.metierService
+      .getRecetteByMetierId(this.metier.id)
+      .subscribe((data) => (this.recettes = data));
   }
 
   getEquipementByRecetteId(recetteId: number): string {
-    let equipement: Equipement =
-      this.metierService.getEquipementByRecetteId(recetteId);
+    let equipement: Equipement = new Equipement();
+    this.metierService
+      .getEquipementByRecetteId(recetteId)
+      .subscribe((data) => (equipement = data));
     return equipement.nom;
   }
 
@@ -50,9 +54,10 @@ export class TailleurComponent implements OnInit {
   }
 
   craftEquipement(recette: Recette) {
-    let equipement: Equipement = this.metierService.getEquipementByRecetteId(
-      recette.id
-    );
+    let equipement: Equipement = new Equipement();
+    this.metierService
+      .getEquipementByRecetteId(recette.id)
+      .subscribe((data) => (equipement = data));
     equipement.quantite = 1;
     this.inventaireService.updateInventaireEquipement(equipement);
     this.removeRessourceFromEquipement(recette);

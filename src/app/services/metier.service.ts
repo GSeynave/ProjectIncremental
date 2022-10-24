@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Equipement } from '../models/equipement';
 import { Metier } from '../models/metier';
 import { Recette } from '../models/recette';
 import { Ressource } from '../models/ressource';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MetierService {
+  constructor() {}
 
-  constructor() { }
-
-  getMetiers() : Metier[] {
+  getMetiers(): Observable<Metier[]> {
     let metiers: Metier[] = [];
     let tailleur: Metier = new Metier();
     tailleur.id = 1;
@@ -25,10 +25,10 @@ export class MetierService {
 
     metiers.push(tailleur);
     metiers.push(bijoutier);
-    return metiers;
+    return of(metiers);
   }
 
-  getRecetteByMetierId(metierId: number): Recette[] {
+  getRecetteByMetierId(metierId: number): Observable<Recette[]> {
     let recettes: Recette[] = [];
     let recette1: Recette = new Recette();
     recette1.id = 1;
@@ -49,20 +49,20 @@ export class MetierService {
     ressource2.id = 1;
     ressource2.idMonstre = 1;
     ressource2.idZone = 1;
-    ressource2.nom = 'Ongle d\'orc';
+    ressource2.nom = "Ongle d'orc";
     recette2.ressources.push(ressource2);
     recettes.push(recette1);
     recettes.push(recette2);
-    return recettes;
+    return of(recettes);
   }
 
-  getEquipementByRecetteId(recetteId: number): Equipement {
+  getEquipementByRecetteId(recetteId: number): Observable<Equipement> {
     let equipement: Equipement = new Equipement();
     equipement.id = 22;
     equipement.level = 1;
     equipement.nom = 'Chapeau de chasseur';
     equipement.recipeId = recetteId;
     equipement.statistiqueId = 22;
-    return equipement;
+    return of(equipement);
   }
 }
