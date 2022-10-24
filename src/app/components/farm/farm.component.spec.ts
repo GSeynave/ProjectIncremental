@@ -53,12 +53,16 @@ describe('FarmComponent', () => {
     spyOn(statistiqueService, 'getStatistiqueById').and.returnValue(
       personnageStatistique
     );
+    spyOn(statistiqueService, 'addStatistiques').and.returnValue(
+      personnageStatistique
+    );
     const spyInitFarm = spyOn(component, 'initFarm');
     component.ngOnInit();
     expect(component.statistiquePersonnage.vie).toEqual(5555);
     expect(component.viePersonnage).toEqual(5555);
     expect(spyInitFarm).toHaveBeenCalled();
   });
+
   it('should not start farm', () => {
     component.zoneId = 0;
     const spyClearFarm = spyOn(component, 'clearFarm');
@@ -140,20 +144,22 @@ describe('FarmComponent', () => {
     expect(spyInventaireService).toHaveBeenCalledTimes(1);
   });
 
-  it('should get percent vie Monstre', () => {
+  it('should get percent vie', () => {
     component.vieMonstre = 6;
     component.statistiqueMonstre.vie = 6;
-    expect(100).toEqual(component.getPercentVieMonstre());
+    expect(100).toEqual(
+      component.getPercentVie(
+        component.vieMonstre,
+        component.statistiqueMonstre.vie
+      )
+    );
     component.vieMonstre = 3;
-    expect(50).toEqual(component.getPercentVieMonstre());
-  });
-
-  it('should get percent vie Personnage', () => {
-    component.viePersonnage = 6;
-    component.statistiquePersonnage.vie = 6;
-    expect(100).toEqual(component.getPercentViePersonnage());
-    component.viePersonnage = 3;
-    expect(50).toEqual(component.getPercentViePersonnage());
+    expect(50).toEqual(
+      component.getPercentVie(
+        component.vieMonstre,
+        component.statistiqueMonstre.vie
+      )
+    );
   });
 
   it('should call round interval tick each time interval tick', fakeAsync(() => {
@@ -165,13 +171,11 @@ describe('FarmComponent', () => {
     discardPeriodicTasks();
   }));
 
-  it('should update stats, attack monstre, attack personnage, endroundcheck', () => {
-    const spyUpdateStatistique = spyOn(component, 'updateStatitistique');
+  it('should attack monstre, attack personnage, endroundcheck', () => {
     const spyAttackMonstre = spyOn(component, 'attackToMonstre');
     const spyAttackPersonnage = spyOn(component, 'attackToPersonnage');
     const spyEndRoundCheck = spyOn(component, 'endRoundCheck');
     component.roundIntervalTick();
-    expect(spyUpdateStatistique).toHaveBeenCalledTimes(1);
     expect(spyAttackMonstre).toHaveBeenCalledTimes(1);
     expect(spyAttackPersonnage).toHaveBeenCalledTimes(1);
     expect(spyEndRoundCheck).toHaveBeenCalledTimes(1);
@@ -223,22 +227,12 @@ describe('FarmComponent', () => {
   });
 
   it('should decrease monstre vie by personnage degat', () => {
-    spyOn(farmService, 'getDegatAuMonstre').and.returnValue(2);
+    spyOn(farmService, 'getDegatInflige').and.returnValue(2);
     const spyUpdateLifeHtmlEntity = spyOn(component, 'updateLifeHtmlEntity');
     component.vieMonstre = 10;
     expect(component.vieMonstre).toBe(10);
     component.attackToMonstre();
     expect(component.vieMonstre).toBe(8);
-    expect(spyUpdateLifeHtmlEntity).toHaveBeenCalledTimes(1);
-  });
-
-  it('should decrease personnage vie by monstre degat', () => {
-    spyOn(farmService, 'getDegatAuPersonnage').and.returnValue(2);
-    const spyUpdateLifeHtmlEntity = spyOn(component, 'updateLifeHtmlEntity');
-    component.viePersonnage = 10;
-    expect(component.viePersonnage).toBe(10);
-    component.attackToPersonnage();
-    expect(component.viePersonnage).toBe(8);
     expect(spyUpdateLifeHtmlEntity).toHaveBeenCalledTimes(1);
   });
 

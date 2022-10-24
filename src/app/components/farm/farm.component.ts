@@ -29,6 +29,7 @@ export class FarmComponent implements OnInit, OnChanges {
   monstreActuel: Monstre = new Monstre();
   statistiquePersonnage: Statistique = new Statistique();
   statistiqueEquipement: Statistique = new Statistique();
+  statistiquePersonnageGlobale: Statistique = new Statistique();
   statistiqueMonstre: Statistique = new Statistique();
   interval: ReturnType<typeof setInterval> | undefined;
   constructor(
@@ -41,9 +42,9 @@ export class FarmComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit(): void {
-    this.statistiquePersonnage = this.statistiqueService.getStatistiqueById(50);
-    this.viePersonnage = this.statistiquePersonnage.vie;
     this.initFarm();
+    this.updateStatitistique();
+    this.viePersonnage = this.statistiquePersonnageGlobale.vie;
   }
 
   initFarm() {
@@ -78,7 +79,6 @@ export class FarmComponent implements OnInit, OnChanges {
   }
 
   roundIntervalTick(): void {
-    this.updateStatitistique();
     this.attackToMonstre();
     this.attackToPersonnage();
     this.endRoundCheck();
@@ -87,7 +87,9 @@ export class FarmComponent implements OnInit, OnChanges {
   endRoundCheck(): void {
     if (this.viePersonnage <= 0) {
       this.mortPersonnageTrt();
+      this.updateStatitistique();
     } else if (this.vieMonstre <= 0) {
+      this.updateStatitistique();
       this.mortMonstreTrt();
     }
   }
@@ -98,23 +100,22 @@ export class FarmComponent implements OnInit, OnChanges {
       this.statistiqueService.getEquipementStatistiqueByPersonnage(
         this.personnage.id
       );
+    this.statistiquePersonnageGlobale = this.statistiqueService.addStatistiques(
+      this.statistiquePersonnage,
+      this.statistiqueMonstre
+    );
   }
 
   attackToMonstre(): void {
-    const degatInflige: number = this.getDegatPersonnage();
+    const degatInflige: number = this.farmService.getDegatInflige(
+      this.statistiquePersonnageGlobale,
+      this.statistiqueMonstre
+    );
     this.vieMonstre -= degatInflige;
     this.updateLifeHtmlEntity(
       'vieMonstre',
       this.vieMonstre,
       this.statistiqueMonstre.vie
-    );
-  }
-
-  getDegatPersonnage(): number {
-    return this.farmService.getDegatAuMonstre(
-      this.statistiquePersonnage,
-      this.statistiqueEquipement,
-      this.statistiqueMonstre
     );
   }
 
@@ -130,20 +131,15 @@ export class FarmComponent implements OnInit, OnChanges {
   }
 
   attackToPersonnage(): void {
-    const degatRecu = this.getDegatMonstre();
+    const degatRecu = this.farmService.getDegatInflige(
+      this.statistiqueMonstre,
+      this.statistiquePersonnageGlobale
+    );
     this.viePersonnage -= degatRecu;
     this.updateLifeHtmlEntity(
       'viePersonnage',
       this.viePersonnage,
-      this.statistiquePersonnage.vie
-    );
-  }
-
-  getDegatMonstre() {
-    return this.farmService.getDegatAuPersonnage(
-      this.statistiqueMonstre,
-      this.statistiqueEquipement,
-      this.statistiquePersonnage
+      this.statistiquePersonnageGlobale.vie
     );
   }
 
@@ -184,12 +180,8 @@ export class FarmComponent implements OnInit, OnChanges {
     this.getMonstreRandom();
   }
 
-  getPercentVieMonstre() {
-    return (100 * this.vieMonstre) / this.statistiqueMonstre.vie;
-  }
-
-  getPercentViePersonnage() {
-    return (100 * this.viePersonnage) / this.statistiquePersonnage.vie;
+  getPercentVie(vieActuelle: number, vieMax: number) {
+    return (100 * vieActuelle) / vieMax;
   }
 
   getNomZone(zoneId: number) {
