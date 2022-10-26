@@ -10,7 +10,7 @@ import { ZoneComponent } from './components/zone/zone.component';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MonstreListeComponent } from './components/monstre-liste/monstre-liste.component';
-import { MonstreComponent } from './components/monstre/monstre.component'
+import { MonstreComponent } from './components/monstre/monstre.component';
 import { MatCardModule } from '@angular/material/card';
 import { RessourceComponent } from './components/ressource/ressource.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -27,7 +27,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { EquipmentComponent } from './components/equipment/equipment.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MetierComponent,
     TailleurComponent,
     EquipmentComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -60,9 +59,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatGridListModule,
     MatListModule,
     MatTableModule,
-    MatSidenavModule
+    MatSidenavModule,
+    HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
