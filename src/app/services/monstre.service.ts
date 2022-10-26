@@ -1,17 +1,18 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of, throwError } from 'rxjs';
+import { ObjectId } from 'mongodb';
+import { catchError, Observable, throwError } from 'rxjs';
 import { Monstre } from '../models/monstre';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MonstreService {
-  url: string = 'http://localhost:3000/api/monstres/monstres';
+  url: string = 'http://localhost:3000/api/monstres';
   constructor(private http: HttpClient) {}
-  getMonstresByZoneId(zoneId: number): Observable<Monstre[]> {
+  getMonstresByZoneId(zoneId: ObjectId): Observable<Monstre[]> {
     return this.http
-      .get<Monstre[]>(this.url)
+      .get<Monstre[]>(this.url + `/${zoneId}`)
       .pipe(catchError(this.handleError));
   }
 

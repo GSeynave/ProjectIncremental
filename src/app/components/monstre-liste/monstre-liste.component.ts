@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ObjectId } from 'mongodb';
 import { Monstre } from 'src/app/models/monstre';
 import { MonstreService } from 'src/app/services/monstre.service';
 
@@ -8,11 +9,14 @@ import { MonstreService } from 'src/app/services/monstre.service';
   styleUrls: ['./monstre-liste.component.css'],
 })
 export class MonstreListeComponent implements OnInit {
-  @Input('zoneId') zoneId: number = 0;
+  @Input('zoneId') zoneId: ObjectId = 0;
   monstres: Monstre[] = [];
-  constructor(private monsteService: MonstreService) {}
+  constructor(private monstreService: MonstreService) {}
 
   ngOnInit(): void {
-    this.monstres = this.monsteService.getMonstresByZoneId(this.zoneId);
+    this.monstreService
+      .getMonstresByZoneId(this.zoneId)
+      .subscribe((data) => (this.monstres = data));
+    console.log('monstres....', this.monstres);
   }
 }

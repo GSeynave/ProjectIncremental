@@ -1,4 +1,11 @@
-import { ComponentFixture, discardPeriodicTasks, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  discardPeriodicTasks,
+  fakeAsync,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
+import { Observable, of } from 'rxjs';
 import { Equipement } from 'src/app/models/equipement';
 import { Ressource } from 'src/app/models/ressource';
 import { InventaireService } from 'src/app/services/inventaire.service';
@@ -16,10 +23,9 @@ describe('InventaireComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [InventaireComponent]
-    })
-      .compileComponents();
-      inventaireService = TestBed.inject(InventaireService);
+      declarations: [InventaireComponent],
+    }).compileComponents();
+    inventaireService = TestBed.inject(InventaireService);
   });
 
   beforeEach(() => {
@@ -36,13 +42,21 @@ describe('InventaireComponent', () => {
     expect(component.inventaireRessource.length).toEqual(0);
     ressources.push(ressource);
     equipements.push(equipement);
-    spyOn(inventaireService, 'getInventaireRessource').and.returnValue(ressources);
-    spyOn(inventaireService, 'getInventaireEquipement').and.returnValue(equipements);
+    let spyRessource = spyOn(
+      inventaireService,
+      'getInventaireRessource'
+    ).and.returnValue(of(ressources));
+    let spyEquipement = spyOn(
+      inventaireService,
+      'getInventaireEquipement'
+    ).and.returnValue(of(equipements));
     fixture.detectChanges();
     tick(1000);
     expect(component.inventaireRessource.length).toEqual(1);
     expect(component.inventaireEquipement.length).toEqual(1);
-    // Clean up RxJS.interval
+    tick(1000);
+    expect(spyRessource).toHaveBeenCalledTimes(20);
+    expect(spyEquipement).toHaveBeenCalledTimes(20);
     discardPeriodicTasks();
-  }))
+  }));
 });

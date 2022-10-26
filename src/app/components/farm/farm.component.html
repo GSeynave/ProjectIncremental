@@ -1,19 +1,37 @@
 <section class="farm-container" *ngIf="zoneId != 0">
-  <h2>{{getNomZone(zoneId)}}</h2>
+  <h2>{{ getNomZone(zoneId) }}</h2>
   <section class="entite-container">
     <article class="personnage-container">
       <article class="personnage-informations">
-        <span>{{personnage.nom}} <b>Lv.{{statistiquePersonnage.niveau}}</b></span>
-        <span>{{viePersonnage | number}} / {{statistiquePersonnage.vie}}</span>
-        <mat-progress-bar id="viePersonnage" [value]="getViePersonnage()"></mat-progress-bar>
+        <span
+          >{{ personnage.nom }}
+          <b>Lv.{{ statistiquePersonnage.niveau }}</b></span
+        >
+        <span
+          >{{ viePersonnage | number }} /
+          {{ statistiquePersonnageGlobale.vie }}</span
+        >
+        <mat-progress-bar
+          id="viePersonnage"
+          [value]="
+            getPercentVie(viePersonnage, statistiquePersonnageGlobale.vie)
+          "
+        ></mat-progress-bar>
       </article>
     </article>
     <span class="vs"> VS </span>
     <article class="monstre-container">
       <article class="monstre-informations">
-        <span>{{monstreActuel.nom}} <b>Lv.{{statistiqueMonstre.niveau}}</b></span> <br>
-        <span>{{vieMonstre | number}} / {{statistiqueMonstre.vie}}</span>
-        <mat-progress-bar id="vieMonstre" [value]="getVieMonstre()"></mat-progress-bar>
+        <span
+          >{{ monstreActuel.nom }}
+          <b>Lv.{{ statistiqueMonstre.niveau }}</b></span
+        >
+        <br />
+        <span>{{ vieMonstre | number }} / {{ statistiqueMonstre.vie }}</span>
+        <mat-progress-bar
+          id="vieMonstre"
+          [value]="getPercentVie(vieMonstre, statistiqueMonstre.vie)"
+        ></mat-progress-bar>
       </article>
     </article>
   </section>

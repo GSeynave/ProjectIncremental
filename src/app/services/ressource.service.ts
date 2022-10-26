@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Ressource } from '../models/ressource';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RessourceService {
+  constructor() {}
 
-  constructor() { }
-
-  getRessourcesByMonstreId(monstreId: number): Ressource[] {
-
+  getRessourcesByMonstreId(monstreId: number): Observable<Ressource[]> {
     let ressources: Ressource[] = [];
     let ressource1: Ressource = new Ressource();
     let ressource2: Ressource = new Ressource();
@@ -18,12 +17,12 @@ export class RessourceService {
       ressource1.id = 1;
       ressource1.idMonstre = 1;
       ressource1.idZone = 1;
-      ressource1.nom = 'Ongle d\'orc';
+      ressource1.nom = "Ongle d'orc";
       ressource1.tauxDrop = 35;
       ressource2.id = 2;
       ressource2.idMonstre = 1;
       ressource2.idZone = 1;
-      ressource2.nom = 'Poils d\'orc';
+      ressource2.nom = "Poils d'orc";
       ressource2.tauxDrop = 5;
     } else if (monstreId == 2) {
       ressource1.id = 1;
@@ -58,7 +57,7 @@ export class RessourceService {
       ressource2.idZone = 1;
       ressource2.nom = 'Dent de vampire';
       ressource2.tauxDrop = 5;
-    }else if (monstreId == 5) {
+    } else if (monstreId == 5) {
       ressource1.id = 1;
       ressource1.idMonstre = 1;
       ressource1.idZone = 1;
@@ -69,7 +68,7 @@ export class RessourceService {
       ressource2.idZone = 1;
       ressource2.nom = 'Griffe de loup garou';
       ressource2.tauxDrop = 5;
-    }else if (monstreId == 6) {
+    } else if (monstreId == 6) {
       ressource1.id = 1;
       ressource1.idMonstre = 1;
       ressource1.idZone = 1;
@@ -80,18 +79,18 @@ export class RessourceService {
       ressource2.idZone = 1;
       ressource2.nom = 'Oeil de fatôme';
       ressource2.tauxDrop = 5;
-    }else if (monstreId == 7) {
+    } else if (monstreId == 7) {
       ressource1.id = 1;
       ressource1.idMonstre = 1;
       ressource1.idZone = 1;
-      ressource1.nom = 'Patte d\'araignée';
+      ressource1.nom = "Patte d'araignée";
       ressource1.tauxDrop = 35;
       ressource2.id = 2;
       ressource2.idMonstre = 1;
       ressource2.idZone = 1;
-      ressource2.nom = 'Toile d\'araignée';
+      ressource2.nom = "Toile d'araignée";
       ressource2.tauxDrop = 5;
-    }else if (monstreId == 8) {
+    } else if (monstreId == 8) {
       ressource1.id = 1;
       ressource1.idMonstre = 1;
       ressource1.idZone = 1;
@@ -102,7 +101,7 @@ export class RessourceService {
       ressource2.idZone = 1;
       ressource2.nom = 'Griffe de chien errant';
       ressource2.tauxDrop = 5;
-    }else if (monstreId == 9) {
+    } else if (monstreId == 9) {
       ressource1.id = 1;
       ressource1.idMonstre = 1;
       ressource1.idZone = 1;
@@ -116,6 +115,6 @@ export class RessourceService {
     }
     ressources.push(ressource1);
     ressources.push(ressource2);
-    return ressources;
+    return of(ressources);
   }
 }

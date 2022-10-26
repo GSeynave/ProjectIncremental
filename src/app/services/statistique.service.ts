@@ -1,44 +1,43 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Equipement } from '../models/equipement';
 import { Statistique } from '../models/statistique';
 import { InventaireService } from './inventaire.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StatistiqueService {
+  constructor(private inventaireService: InventaireService) {}
 
-  constructor(private inventaireService: InventaireService) { }
-
-  getStatistiqueById(id: number): Statistique {
+  getStatistiqueById(id: number): Observable<Statistique> {
     let statistique: Statistique = new Statistique();
     if (id === 22) {
-    statistique.id = 22;
-    // statistique.vie = 500;
-    statistique.terre = 2;
-    // statistique.feu = 200;
-    // statistique.air = 200;
-    // statistique.eau = 200;
-    // statistique.sagesse = 200;
-    // statistique.hate = 200;
-    // statistique.puissance = 200;
-    // statistique.dexterite = 200;
-    // statistique.precision = 200;
-    // statistique.energie = 200;
-    // statistique.critiqueChance = 200;
-    // statistique.critiqueDommage = 200;
-    // statistique.resistanceTerre = 200;
-    // statistique.resistanceFeu = 200;
-    // statistique.resistanceAir = 200;
-    // statistique.resistanceEau = 200;
+      statistique.id = 22;
+      // statistique.vie = 500;
+      statistique.terre = 2;
+      // statistique.feu = 200;
+      // statistique.air = 200;
+      // statistique.eau = 200;
+      // statistique.sagesse = 200;
+      // statistique.hate = 200;
+      // statistique.puissance = 200;
+      // statistique.dexterite = 200;
+      // statistique.precision = 200;
+      // statistique.energie = 200;
+      // statistique.critiqueChance = 200;
+      // statistique.critiqueDommage = 200;
+      // statistique.resistanceTerre = 200;
+      // statistique.resistanceFeu = 200;
+      // statistique.resistanceAir = 200;
+      // statistique.resistanceEau = 200;
 
-    return statistique;
+      return of(statistique);
     }
 
-    statistique.id = 50
+    statistique.id = 50;
     statistique.vie = 20;
-    statistique.terre = 5,
-    statistique.feu = 5;
+    (statistique.terre = 5), (statistique.feu = 5);
     statistique.air = 5;
     statistique.eau = 5;
     statistique.sagesse = 5;
@@ -53,33 +52,54 @@ export class StatistiqueService {
     statistique.resistanceFeu = 5;
     statistique.resistanceAir = 5;
     statistique.resistanceEau = 5;
-    if(id == 50) {
+    if (id == 50) {
       statistique.vie = 100;
     }
-    return statistique;
+    return of(statistique);
   }
 
-  getEquipementStatistiqueByPersonnage(personnageId: number) : Statistique {
-    let equipements: Equipement[] = []
-    equipements = this.inventaireService.getEquipementsByPersonnageId(personnageId);
-    let statistiqueEquipement: Statistique = this.getStatiqueByEquipement(equipements);
-    return statistiqueEquipement;
+  getEquipementStatistiqueByPersonnage(
+    personnageId: number
+  ): Observable<Statistique> {
+    let equipements: Equipement[] = [];
+    this.inventaireService
+      .getEquipementsByPersonnageId(personnageId)
+      .subscribe((data) => (equipements = data));
+    let statistiqueEquipement: Statistique = new Statistique();
+    this.getStatiqueByEquipement(equipements).subscribe(
+      (data) => (statistiqueEquipement = data)
+    );
+    return of(statistiqueEquipement);
   }
 
-  private getStatiqueByEquipement(equipements: Equipement[]): Statistique {
+  private getStatiqueByEquipement(
+    equipements: Equipement[]
+  ): Observable<Statistique> {
     let statTotal: Statistique = new Statistique();
-    equipements.forEach( equipement => {
-      let statTemp: Statistique = this.getStatistiqueById(equipement.id);
-      let statistiqueMultiple = this.getmultipleStatistiqueByEquipementQuantite(statTemp, equipement.quantite);
-      statTotal = this.addStatistiques(statTotal, statistiqueMultiple);
+    equipements.forEach((equipement) => {
+      let statTemp: Statistique = new Statistique();
+      this.getStatistiqueById(equipement.id).subscribe(
+        (data) => (statTemp = data)
+      );
+      let statistiqueMultiple: Statistique = new Statistique();
+      this.getmultipleStatistiqueByEquipementQuantite(
+        statTemp,
+        equipement.quantite
+      ).subscribe((data) => (statistiqueMultiple = data));
+      this.addStatistiques(statTotal, statistiqueMultiple).subscribe(
+        (data) => (statTotal = data)
+      );
     });
 
-    return statTotal;
+    return of(statTotal);
   }
 
-  getmultipleStatistiqueByEquipementQuantite(stat:Statistique, quantite: number): Statistique {
+  getmultipleStatistiqueByEquipementQuantite(
+    stat: Statistique,
+    quantite: number
+  ): Observable<Statistique> {
     let statTotal: Statistique = new Statistique();
-    statTotal.vie = stat.vie *quantite;
+    statTotal.vie = stat.vie * quantite;
     statTotal.energie = stat.energie * quantite;
     statTotal.feu = stat.feu * quantite;
     statTotal.air = stat.air * quantite;
@@ -89,7 +109,7 @@ export class StatistiqueService {
     statTotal.puissance = stat.puissance * quantite;
     statTotal.hate = stat.hate * quantite;
     statTotal.dexterite = stat.dexterite * quantite;
-    statTotal.precision = stat.precision * quantite
+    statTotal.precision = stat.precision * quantite;
     statTotal.critiqueChance = stat.critiqueChance * quantite;
     statTotal.critiqueDommage = stat.critiqueDommage * quantite;
     statTotal.resistanceAir = stat.resistanceAir * quantite;
@@ -97,11 +117,14 @@ export class StatistiqueService {
     statTotal.resistanceFeu = stat.resistanceFeu * quantite;
     statTotal.resistanceTerre = stat.terre * quantite;
 
-    return statTotal;
+    return of(statTotal);
   }
 
-  addStatistiques(stat1: Statistique, stat2: Statistique): Statistique {
-    let statTotal : Statistique = new Statistique();
+  addStatistiques(
+    stat1: Statistique,
+    stat2: Statistique
+  ): Observable<Statistique> {
+    let statTotal: Statistique = new Statistique();
     statTotal.vie = stat1.vie + stat2.vie;
     statTotal.energie = stat1.energie + stat2.energie;
     statTotal.feu = stat1.feu + stat2.feu;
@@ -120,7 +143,7 @@ export class StatistiqueService {
     statTotal.resistanceFeu = stat1.resistanceFeu + stat2.resistanceFeu;
     statTotal.resistanceTerre = stat1.resistanceTerre + stat2.resistanceTerre;
 
-    return statTotal;
+    return of(statTotal);
   }
 
   getRandomStatistique(max: number) {
