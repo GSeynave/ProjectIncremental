@@ -1,39 +1,37 @@
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { catchError, Observable, of, throwError } from 'rxjs';
 import { Zone } from '../models/zone';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ZoneService {
-  constructor() {}
+  url: string = 'http://localhost:3000/api/zones';
+  constructor(private http: HttpClient) {}
 
   getZones(): Observable<Zone[]> {
-    let zones: Zone[] = [];
-    let zone1: Zone = new Zone();
-    zone1.id = 1;
-    zone1.nom = 'Cimietière hanté';
-    let zone2: Zone = new Zone();
-    zone2.id = 2;
-    zone2.nom = 'Forêt enchantée';
-    let zone3: Zone = new Zone();
-    zone3.id = 3;
-    zone3.nom = 'Plaine devastée';
-    zones.push(zone1);
-    zones.push(zone2);
-    zones.push(zone3);
-    return of(zones);
+    return this.http.get<Zone[]>(this.url).pipe(catchError(this.handleError));
   }
 
-  getNomZone(zoneId: number): Observable<string> {
-    let zone: string = '';
-    if (zoneId == 1) {
-      zone = 'Cimetière hanté';
-    } else if (zoneId == 2) {
-      zone = 'Forêt enchantée';
-    } else if (zoneId == 3) {
-      zone = 'Plaine devastée';
+  getZoneById(zoneId: number): Observable<Zone> {
+    return this.http
+      .get<Zone>(this.url + `/${zoneId}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      console.log('An error occured:', error.error);
+    } else {
+      console.error(
+        `Backend returned code ${error.status}, body was: `,
+        error.error
+      );
     }
-    return of(zone);
+
+    return throwError(
+      () => new Error('Something bad happened; please try again later.')
+    );
   }
 }

@@ -1,6 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ObjectId } from 'mongodb';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Monstre } from '../models/monstre';
 
@@ -10,9 +9,9 @@ import { Monstre } from '../models/monstre';
 export class MonstreService {
   url: string = 'http://localhost:3000/api/monstres';
   constructor(private http: HttpClient) {}
-  getMonstresByZoneId(zoneId: ObjectId): Observable<Monstre[]> {
+  getMonstresByZoneId(zoneId: number): Observable<Monstre[]> {
     return this.http
-      .get<Monstre[]>(this.url + `/${zoneId}`)
+      .get<Monstre[]>(this.url + `/zone/${zoneId}`)
       .pipe(catchError(this.handleError));
   }
 

@@ -1,5 +1,5 @@
-<section class="farm-container" *ngIf="zoneId != 0">
-  <h2>{{ getNomZone(zoneId) }}</h2>
+<section class="farm-container" id="zoneNom">
+  <h2>{{ zone.nom }}</h2>
   <section class="entite-container">
     <article class="personnage-container">
       <article class="personnage-informations">
@@ -20,8 +20,11 @@
       </article>
     </article>
     <span class="vs"> VS </span>
-    <article class="monstre-container">
-      <article class="monstre-informations">
+    <div class="monstre-container">
+      <article
+        class="monstre-informations"
+        *ngIf="monstreActuel && monstreActuel.nom; else elseBlock"
+      >
         <span
           >{{ monstreActuel.nom }}
           <b>Lv.{{ statistiqueMonstre.niveau }}</b></span
@@ -33,6 +36,7 @@
           [value]="getPercentVie(vieMonstre, statistiqueMonstre.vie)"
         ></mat-progress-bar>
       </article>
-    </article>
+      <ng-template #elseBlock>aucun monstre</ng-template>
+    </div>
   </section>
 </section>

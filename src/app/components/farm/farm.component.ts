@@ -15,6 +15,7 @@ import { MonstreService } from 'src/app/services/monstre.service';
 import { RessourceService } from 'src/app/services/ressource.service';
 import { StatistiqueService } from 'src/app/services/statistique.service';
 import { ZoneService } from 'src/app/services/zone.service';
+import { Zone } from 'src/app/models/zone';
 
 @Component({
   selector: 'app-farm',
@@ -23,7 +24,7 @@ import { ZoneService } from 'src/app/services/zone.service';
 })
 export class FarmComponent implements OnInit, OnChanges {
   @Input() personnage: Personnage = new Personnage();
-  @Input() zoneId: number = 0;
+  @Input() zone: Zone = new Zone();
   viePersonnage: number = 0;
   vieMonstre: number = 0;
   monstreActuel: Monstre = new Monstre();
@@ -48,7 +49,8 @@ export class FarmComponent implements OnInit, OnChanges {
   }
 
   initFarm() {
-    if (this.zoneId != 0) {
+    if (this.zone.id != 0) {
+      console.log('zone id farm: ', this.zone.id);
       this.clearFarm();
       this.getMonstreRandom();
       this.farm();
@@ -57,10 +59,10 @@ export class FarmComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (
-      changes['zoneId'] &&
-      changes['zoneId'].currentValue != changes['zoneId'].previousValue
+      changes['zone'] &&
+      changes['zone'].currentValue != changes['zone'].previousValue
     ) {
-      this.zoneId = changes['zoneId'].currentValue;
+      this.zone = changes['zone'].currentValue;
       this.initFarm();
     }
 
@@ -150,14 +152,19 @@ export class FarmComponent implements OnInit, OnChanges {
 
   getMonstreRandom() {
     let monstres: Monstre[] = [];
-    this.monstreService
-      .getMonstresByZoneId(this.zoneId)
-      .subscribe((data) => (monstres = data));
-    this.monstreActuel = monstres[Math.floor(Math.random() * monstres.length)];
+    this.monstreService.getMonstresByZoneId(this.zone.id).subscribe((data) => {
+      monstres = data;
+      console.log('liste monstres: ', monstres);
+      this.monstreActuel =
+        monstres[Math.floor(Math.random() * monstres.length)];
+      console.log('monstre actuel :', this.monstreActuel);
+    });
     this.statistiqueService
       .getStatistiqueById(this.monstreActuel.idStatistique)
-      .subscribe((data) => (this.statistiqueMonstre = data));
-    this.vieMonstre = this.statistiqueMonstre.vie;
+      .subscribe((data) => {
+        this.statistiqueMonstre = data;
+        this.vieMonstre = this.statistiqueMonstre.vie;
+      });
   }
 
   getDrop() {
@@ -190,9 +197,5 @@ export class FarmComponent implements OnInit, OnChanges {
 
   getPercentVie(vieActuelle: number, vieMax: number) {
     return (100 * vieActuelle) / vieMax;
-  }
-
-  getNomZone(zoneId: number) {
-    return this.zoneService.getNomZone(zoneId);
   }
 }

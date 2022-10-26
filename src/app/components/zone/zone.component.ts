@@ -14,6 +14,7 @@ export class ZoneComponent implements OnInit {
   ngOnInit(): void {}
 
   utiliserPortail(zoneTeleport: Zone) {
+    console.log('utilisation du portail', zoneTeleport);
     this.personnageService.setZoneId(zoneTeleport.id);
   }
 }
