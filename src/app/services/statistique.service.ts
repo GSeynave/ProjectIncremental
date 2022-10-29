@@ -55,9 +55,7 @@ export class StatistiqueService {
         statTemp,
         equipement.quantite
       ).subscribe((data) => (statistiqueMultiple = data));
-      this.addStatistiques(statTotal, statistiqueMultiple).subscribe(
-        (data) => (statTotal = data)
-      );
+      this.addStatistiques(statTotal, statistiqueMultiple);
     });
 
     return of(statTotal);
@@ -92,9 +90,7 @@ export class StatistiqueService {
   addStatistiques(
     stat1: Statistique,
     stat2: Statistique
-  ): Observable<Statistique> {
-    console.log('stat1', stat1);
-    console.log('stat2', stat2);
+  ): Statistique {
     let statTotal: Statistique = new Statistique();
     statTotal.vie = stat1.vie + stat2.vie;
     statTotal.energie = stat1.energie + stat2.energie;
@@ -114,7 +110,7 @@ export class StatistiqueService {
     statTotal.resistanceFeu = stat1.resistanceFeu + stat2.resistanceFeu;
     statTotal.resistanceTerre = stat1.resistanceTerre + stat2.resistanceTerre;
 
-    return of(statTotal);
+    return statTotal;
   }
 
   getRandomStatistique(max: number) {

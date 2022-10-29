@@ -101,11 +101,7 @@ export class FarmComponent implements OnInit, OnChanges {
 
   updateStatitistique(): void {
     this.personnageService
-      .getPersonnageStatistique(this.personnage.id)
-      .subscribe((data) => {
-        this.statistiquePersonnage = data;
-        console.log('statis perso', this.statistiquePersonnage);
-      });
+      .getPersonnageStatistique(this.personnage.id).then( res => this.statistiquePersonnage = res);
   }
 
   attackToMonstre(): void {

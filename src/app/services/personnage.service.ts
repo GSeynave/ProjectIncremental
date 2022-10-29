@@ -26,13 +26,12 @@ export class PersonnageService {
     return this.personnage;
   }
 
-  getPersonnageStatistique(id: number) {
+  async getPersonnageStatistique(id: number) {
     // get statistique du personnage
 
     let statistiquePerso: Statistique = new Statistique();
-    this.statistiqueService.getStatistiqueById(id).subscribe((data) => {
-      statistiquePerso = data;
-    });
+    const statistiquePerso$ = this.statistiqueService.getStatistiqueById(id);
+    statistiquePerso = await firstValueFrom(statistiquePerso$) ;
     // get statistique des equipement
     let statistiqueEquipement = new Statistique();
     /*
@@ -52,10 +51,8 @@ export class PersonnageService {
       });
     });
 */
-    return this.statistiqueService.addStatistiques(
-      statistiquePerso,
-      statistiqueEquipement
-    );
+const statGlobal = this.statistiqueService.addStatistiques(statistiquePerso, statistiqueEquipement);
+return statGlobal;
   }
 
   setZoneId(zoneId: number) {
@@ -63,3 +60,7 @@ export class PersonnageService {
   }
   // TODO mettre ici les actions relatif aux personnage (update statistique.. ?)
 }
+function firstValueFrom(statistiquePerso$: any): Statistique | PromiseLike<Statistique> {
+  throw new Error('Function not implemented.');
+}
+
