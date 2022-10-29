@@ -16,6 +16,7 @@ import { RessourceService } from 'src/app/services/ressource.service';
 import { StatistiqueService } from 'src/app/services/statistique.service';
 import { ZoneService } from 'src/app/services/zone.service';
 import { Zone } from 'src/app/models/zone';
+import { PersonnageService } from 'src/app/services/personnage.service';
 
 @Component({
   selector: 'app-farm',
@@ -39,10 +40,12 @@ export class FarmComponent implements OnInit, OnChanges {
     private statistiqueService: StatistiqueService,
     private ressourceService: RessourceService,
     private inventaireService: InventaireService,
+    private personnageService: PersonnageService,
     private zoneService: ZoneService
   ) {}
 
   ngOnInit(): void {
+    console.log('personnage:', this.personnage);
     this.initFarm();
     this.updateStatitistique();
     this.viePersonnage = this.statistiquePersonnageGlobale.vie;
@@ -97,20 +100,12 @@ export class FarmComponent implements OnInit, OnChanges {
   }
 
   updateStatitistique(): void {
-    this.statistiqueService.getStatistiqueById(50).subscribe((data) => {
-      this.statistiquePersonnage = data;
-      this.statistiqueService
-        .getEquipementStatistiqueByPersonnage(this.personnage.id)
-        .subscribe((data) => {
-          this.statistiqueEquipement = data;
-          this.statistiqueService
-            .addStatistiques(
-              this.statistiquePersonnage,
-              this.statistiqueMonstre
-            )
-            .subscribe((data) => (this.statistiquePersonnageGlobale = data));
-        });
-    });
+    this.personnageService
+      .getPersonnageStatistique(this.personnage.id)
+      .subscribe((data) => {
+        this.statistiquePersonnage = data;
+        console.log('statis perso', this.statistiquePersonnage);
+      });
   }
 
   attackToMonstre(): void {

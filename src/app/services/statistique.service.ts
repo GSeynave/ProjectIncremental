@@ -1,5 +1,6 @@
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { catchError, Observable, of, throwError } from 'rxjs';
 import { Equipement } from '../models/equipement';
 import { Statistique } from '../models/statistique';
 import { InventaireService } from './inventaire.service';
@@ -8,73 +9,41 @@ import { InventaireService } from './inventaire.service';
   providedIn: 'root',
 })
 export class StatistiqueService {
-  constructor(private inventaireService: InventaireService) {}
+  url: string = 'http://localhost:3000/api/statistiques';
+  constructor(
+    private inventaireService: InventaireService,
+    private http: HttpClient
+  ) {}
 
   getStatistiqueById(id: number): Observable<Statistique> {
-    let statistique: Statistique = new Statistique();
-    if (id === 22) {
-      statistique.id = 22;
-      // statistique.vie = 500;
-      statistique.terre = 2;
-      // statistique.feu = 200;
-      // statistique.air = 200;
-      // statistique.eau = 200;
-      // statistique.sagesse = 200;
-      // statistique.hate = 200;
-      // statistique.puissance = 200;
-      // statistique.dexterite = 200;
-      // statistique.precision = 200;
-      // statistique.energie = 200;
-      // statistique.critiqueChance = 200;
-      // statistique.critiqueDommage = 200;
-      // statistique.resistanceTerre = 200;
-      // statistique.resistanceFeu = 200;
-      // statistique.resistanceAir = 200;
-      // statistique.resistanceEau = 200;
-
-      return of(statistique);
-    }
-
-    statistique.id = 50;
-    statistique.vie = 20;
-    (statistique.terre = 5), (statistique.feu = 5);
-    statistique.air = 5;
-    statistique.eau = 5;
-    statistique.sagesse = 5;
-    statistique.hate = 5;
-    statistique.puissance = 5;
-    statistique.dexterite = 5;
-    statistique.precision = 5;
-    statistique.energie = 5;
-    statistique.critiqueChance = 5;
-    statistique.critiqueDommage = 5;
-    statistique.resistanceTerre = 5;
-    statistique.resistanceFeu = 5;
-    statistique.resistanceAir = 5;
-    statistique.resistanceEau = 5;
-    if (id == 50) {
-      statistique.vie = 100;
-    }
-    return of(statistique);
+    console.log('id to get perso stat', id);
+    console.log(this.http.get<Statistique>(this.url + `/${id}`));
+    return this.http
+      .get<Statistique>(this.url + `/${id}`)
+      .pipe(catchError(this.handleError));
   }
 
   getEquipementStatistiqueByPersonnage(
     personnageId: number
   ): Observable<Statistique> {
+    console.log('get equipement stat by perso id');
     let equipements: Equipement[] = [];
     this.inventaireService
       .getEquipementsByPersonnageId(personnageId)
       .subscribe((data) => (equipements = data));
     let statistiqueEquipement: Statistique = new Statistique();
-    this.getStatiqueByEquipement(equipements).subscribe(
-      (data) => (statistiqueEquipement = data)
-    );
+    if (equipements.length > 0) {
+      this.getStatiqueByEquipement(equipements).subscribe(
+        (data) => (statistiqueEquipement = data)
+      );
+    }
     return of(statistiqueEquipement);
   }
 
   private getStatiqueByEquipement(
     equipements: Equipement[]
   ): Observable<Statistique> {
+    console.log('get statisique by equipement');
     let statTotal: Statistique = new Statistique();
     equipements.forEach((equipement) => {
       let statTemp: Statistique = new Statistique();
@@ -124,6 +93,8 @@ export class StatistiqueService {
     stat1: Statistique,
     stat2: Statistique
   ): Observable<Statistique> {
+    console.log('stat1', stat1);
+    console.log('stat2', stat2);
     let statTotal: Statistique = new Statistique();
     statTotal.vie = stat1.vie + stat2.vie;
     statTotal.energie = stat1.energie + stat2.energie;
@@ -148,5 +119,20 @@ export class StatistiqueService {
 
   getRandomStatistique(max: number) {
     return Math.floor(Math.random() * max);
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      console.log('An error occured:', error.error);
+    } else {
+      console.error(
+        `Backend returned code ${error.status}, body was: `,
+        error.error
+      );
+    }
+
+    return throwError(
+      () => new Error('Something bad happened; please try again later.')
+    );
   }
 }
