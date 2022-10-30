@@ -21,6 +21,7 @@ export class PersonnageService {
     this.personnage.niveauOmega = 0;
     this.personnage.nom = 'ShOcK';
     this.personnage.zoneId = 1;
+    this.personnage.idInventaire = 1;
   }
 
   getPersonnageById(id: number) {

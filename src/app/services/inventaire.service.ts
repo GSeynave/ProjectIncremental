@@ -1,5 +1,6 @@
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { catchError, Observable, of, throwError } from 'rxjs';
 import { Equipement } from '../models/equipement';
 import { Ressource } from '../models/ressource';
 
@@ -7,21 +8,17 @@ import { Ressource } from '../models/ressource';
   providedIn: 'root',
 })
 export class InventaireService {
+  url: string = 'http://localhost:3000/api/inventaires';
   inventaireRessources: Ressource[] = [];
   inventaireEquipements: Equipement[] = [];
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  addRessource(ressource: Ressource): Observable<boolean> {
-    console.log('drop :', ressource);
-    const index = this.inventaireRessources.findIndex(
-      (ressourceInventaire) => ressourceInventaire.nom === ressource.nom
-    );
-    if (index > -1) {
-      this.inventaireRessources[index].quantite += ressource.quantite;
-    } else {
-      this.inventaireRessources.push(ressource);
-    }
-    return of(true);
+  addRessource(ressource: Ressource, id: number) {
+    console.log('api call: ' + this.url + '/ressources');
+    const body = { id: id, ressource: ressource };
+    return this.http
+      .post<any>(this.url + '/ressources', body)
+      .pipe(catchError(this.handleError));
   }
 
   removeRessource(ressource: Ressource): Observable<boolean> {
@@ -62,5 +59,20 @@ export class InventaireService {
   updateInventaireEquipement(equipement: Equipement): Observable<boolean> {
     this.inventaireEquipements.push(equipement);
     return of(true);
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      console.log('An error occured:', error.error);
+    } else {
+      console.error(
+        `Backend returned code ${error.status}, body was: `,
+        error.error
+      );
+    }
+
+    return throwError(
+      () => new Error('Something bad happened; please try again later.')
+    );
   }
 }

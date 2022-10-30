@@ -159,16 +159,23 @@ export class FarmComponent implements OnInit, OnChanges {
   }
 
   getDrop() {
+    console.log('get drop');
     let ressources: Ressource[] = [];
     this.ressourceService
       .getRessourcesByMonstreId(this.monstreActuel.id)
-      .subscribe((data) => (ressources = data));
-    ressources.forEach((ressource) => {
-      if (Math.floor(Math.random() * 100) <= ressource.tauxDrop) {
-        ressource.quantite = 1;
-        this.inventaireService.addRessource(ressource);
-      }
-    });
+      .subscribe((data) => {
+        console.log('recuperation ressources monstre:', data);
+        ressources = data;
+        ressources.forEach((ressource) => {
+          if (Math.floor(Math.random() * 100) <= ressource.tauxDrop) {
+            ressource.quantite = 1;
+            console.log('drop !');
+            this.inventaireService
+              .addRessource(ressource, this.personnage.idInventaire)
+              .subscribe();
+          }
+        });
+      });
   }
 
   clearFarm(): void {
