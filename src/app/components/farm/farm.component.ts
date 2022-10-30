@@ -48,6 +48,7 @@ export class FarmComponent implements OnInit, OnChanges {
   }
 
   initFarm() {
+    console.log('init farm this.zone id', this.zone.id);
     if (this.zone.id != 0) {
       this.clearFarm();
       this.getMonstreRandom();
@@ -60,6 +61,7 @@ export class FarmComponent implements OnInit, OnChanges {
       changes['zone'] &&
       changes['zone'].currentValue != changes['zone'].previousValue
     ) {
+      console.log('zone changed', changes);
       this.zone = changes['zone'].currentValue;
       this.initFarm();
     }

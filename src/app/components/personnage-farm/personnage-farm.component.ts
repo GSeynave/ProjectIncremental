@@ -21,18 +21,16 @@ export class PersonnageFarmComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.personnage = this.personnageService.getPersonnageById(1);
-    if (this.personnage.zoneId != 0) {
-      this.zoneId = this.personnage.zoneId;
-      this.zoneService.getZoneById(this.zoneId).subscribe((data) => {
-        this.zone = data;
-      });
-    }
-
     this.interval = setInterval(() => {
       this.personnage = this.personnageService.getPersonnageById(1);
-      if (this.zoneId !== this.personnage.zoneId) {
+      if (
+        this.personnage.zoneId != 0 &&
+        this.zoneId != this.personnage.zoneId
+      ) {
         this.zoneId = this.personnage.zoneId;
+        this.zoneService.getZoneById(this.zoneId).subscribe((data) => {
+          this.zone = data;
+        });
       }
     }, 1000);
   }
