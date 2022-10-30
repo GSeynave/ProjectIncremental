@@ -31,7 +31,6 @@ export class PersonnageFarmComponent implements OnInit {
 
     this.interval = setInterval(() => {
       this.personnage = this.personnageService.getPersonnageById(1);
-      console.log('interval personnage:', this.personnage);
       if (this.zoneId !== this.personnage.zoneId) {
         this.zoneId = this.personnage.zoneId;
       }

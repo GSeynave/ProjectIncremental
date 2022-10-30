@@ -31,7 +31,6 @@ export class FarmComponent implements OnInit, OnChanges {
   monstreActuel: Monstre = new Monstre();
   statistiquePersonnage: Statistique = new Statistique();
   statistiqueEquipement: Statistique = new Statistique();
-  statistiquePersonnageGlobale: Statistique = new Statistique();
   statistiqueMonstre: Statistique = new Statistique();
   interval: ReturnType<typeof setInterval> | undefined;
   constructor(
@@ -45,15 +44,11 @@ export class FarmComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit(): void {
-    console.log('personnage:', this.personnage);
     this.initFarm();
-    this.updateStatitistique();
-    this.viePersonnage = this.statistiquePersonnageGlobale.vie;
   }
 
   initFarm() {
     if (this.zone.id != 0) {
-      console.log('zone id farm: ', this.zone.id);
       this.clearFarm();
       this.getMonstreRandom();
       this.farm();
@@ -77,7 +72,8 @@ export class FarmComponent implements OnInit, OnChanges {
     }
   }
 
-  farm() {
+  async farm() {
+    await this.updateStatitistique();
     this.interval = setInterval(() => {
       this.roundIntervalTick();
     }, 1000);
@@ -92,24 +88,27 @@ export class FarmComponent implements OnInit, OnChanges {
   endRoundCheck(): void {
     if (this.viePersonnage <= 0) {
       this.mortPersonnageTrt();
-      this.updateStatitistique();
     } else if (this.vieMonstre <= 0) {
-      this.updateStatitistique();
       this.mortMonstreTrt();
     }
   }
 
-  updateStatitistique(): void {
+  async updateStatitistique() {
     this.personnageService
-      .getPersonnageStatistique(this.personnage.id).then( res => this.statistiquePersonnage = res);
+      .getPersonnageStatistique(this.personnage.id)
+      .then((res) => {
+        this.statistiquePersonnage = res;
+        this.viePersonnage = this.statistiquePersonnage.vie;
+      });
   }
 
-  attackToMonstre(): void {
-    const degatInflige: number = this.farmService.getDegatInflige(
-      this.statistiquePersonnageGlobale,
+  async attackToMonstre() {
+    const degatInflige: number = await this.farmService.getDegatInflige(
+      this.statistiquePersonnage,
       this.statistiqueMonstre
     );
     this.vieMonstre -= degatInflige;
+    if (this.vieMonstre < 0) this.vieMonstre = 0;
     this.updateLifeHtmlEntity(
       'vieMonstre',
       this.vieMonstre,
@@ -128,16 +127,17 @@ export class FarmComponent implements OnInit, OnChanges {
     ).toFixed(1);
   }
 
-  attackToPersonnage(): void {
-    const degatRecu = this.farmService.getDegatInflige(
+  async attackToPersonnage() {
+    const degatRecu = await this.farmService.getDegatInflige(
       this.statistiqueMonstre,
-      this.statistiquePersonnageGlobale
+      this.statistiquePersonnage
     );
     this.viePersonnage -= degatRecu;
+    if (this.viePersonnage < 0) this.viePersonnage = 0;
     this.updateLifeHtmlEntity(
       'viePersonnage',
       this.viePersonnage,
-      this.statistiquePersonnageGlobale.vie
+      this.statistiquePersonnage.vie
     );
   }
 
@@ -145,17 +145,15 @@ export class FarmComponent implements OnInit, OnChanges {
     let monstres: Monstre[] = [];
     this.monstreService.getMonstresByZoneId(this.zone.id).subscribe((data) => {
       monstres = data;
-      console.log('liste monstres: ', monstres);
       this.monstreActuel =
         monstres[Math.floor(Math.random() * monstres.length)];
-      console.log('monstre actuel :', this.monstreActuel);
+      this.statistiqueService
+        .getStatistiqueById(this.monstreActuel.idStatistique)
+        .subscribe((data) => {
+          this.statistiqueMonstre = data;
+          this.vieMonstre = this.statistiqueMonstre.vie;
+        });
     });
-    this.statistiqueService
-      .getStatistiqueById(this.monstreActuel.idStatistique)
-      .subscribe((data) => {
-        this.statistiqueMonstre = data;
-        this.vieMonstre = this.statistiqueMonstre.vie;
-      });
   }
 
   getDrop() {
@@ -182,6 +180,7 @@ export class FarmComponent implements OnInit, OnChanges {
   }
 
   mortMonstreTrt(): void {
+    this.updateStatitistique();
     this.getDrop();
     this.getMonstreRandom();
   }

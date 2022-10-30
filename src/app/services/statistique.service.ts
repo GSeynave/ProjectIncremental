@@ -87,10 +87,7 @@ export class StatistiqueService {
     return of(statTotal);
   }
 
-  addStatistiques(
-    stat1: Statistique,
-    stat2: Statistique
-  ): Statistique {
+  addStatistiques(stat1: Statistique, stat2: Statistique): Statistique {
     let statTotal: Statistique = new Statistique();
     statTotal.vie = stat1.vie + stat2.vie;
     statTotal.energie = stat1.energie + stat2.energie;

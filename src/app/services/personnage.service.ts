@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { Equipement } from '../models/equipement';
 import { Personnage } from '../models/personnage';
 import { Statistique } from '../models/statistique';
@@ -31,7 +32,7 @@ export class PersonnageService {
 
     let statistiquePerso: Statistique = new Statistique();
     const statistiquePerso$ = this.statistiqueService.getStatistiqueById(id);
-    statistiquePerso = await firstValueFrom(statistiquePerso$) ;
+    statistiquePerso = await firstValueFrom(statistiquePerso$);
     // get statistique des equipement
     let statistiqueEquipement = new Statistique();
     /*
@@ -51,8 +52,12 @@ export class PersonnageService {
       });
     });
 */
-const statGlobal = this.statistiqueService.addStatistiques(statistiquePerso, statistiqueEquipement);
-return statGlobal;
+    const statGlobal = this.statistiqueService.addStatistiques(
+      statistiquePerso,
+      statistiqueEquipement
+    );
+    statGlobal.niveau = statistiquePerso.niveau;
+    return statGlobal;
   }
 
   setZoneId(zoneId: number) {
@@ -60,7 +65,3 @@ return statGlobal;
   }
   // TODO mettre ici les actions relatif aux personnage (update statistique.. ?)
 }
-function firstValueFrom(statistiquePerso$: any): Statistique | PromiseLike<Statistique> {
-  throw new Error('Function not implemented.');
-}
-

@@ -8,14 +8,11 @@
           <b>Lv.{{ statistiquePersonnage.niveau }}</b></span
         >
         <span
-          >{{ viePersonnage | number }} /
-          {{ statistiquePersonnageGlobale.vie }}</span
+          >{{ viePersonnage | number }} / {{ statistiquePersonnage.vie }}</span
         >
         <mat-progress-bar
           id="viePersonnage"
-          [value]="
-            getPercentVie(viePersonnage, statistiquePersonnageGlobale.vie)
-          "
+          [value]="getPercentVie(viePersonnage, statistiquePersonnage.vie)"
         ></mat-progress-bar>
       </article>
     </article>

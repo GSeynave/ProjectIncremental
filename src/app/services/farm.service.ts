@@ -10,7 +10,7 @@ export class FarmService {
   getDegatInflige(
     personnageStatistique: Statistique,
     monstreStatistique: Statistique
-  ): number {
+  ) {
     const degatTerre: number = this.getDegat(
       personnageStatistique.terre,
       monstreStatistique.resistanceTerre
@@ -28,7 +28,9 @@ export class FarmService {
       monstreStatistique.resistanceEau
     );
     //Ajout des dommage critique
-    return Math.round((degatTerre + degatFeu + degatAir + degatEau) * 10) / 100;
+    return Promise.resolve(
+      Math.round((degatTerre + degatFeu + degatAir + degatEau) * 10) / 100
+    );
   }
 
   getDegat(statistiquePersonnage: number, resistance: number): number {
