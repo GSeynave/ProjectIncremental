@@ -65,13 +65,15 @@ export class TailleurComponent implements OnInit {
 
   removeRessourceFromEquipement(recette: Recette) {
     recette.ressources.forEach((ressource) => {
-      this.inventaireService.removeRessource(ressource);
+      // TODO fix idPersonnage !
+      this.inventaireService.updateRessource(ressource, 1);
     });
   }
   getQuantiteInInventaire(ressource: Ressource): number {
     let quantite: number = 0;
     this.inventaireService
-      .getQuantite(ressource)
+      // TODO fix id personnage
+      .getQuantite(ressource, 1)
       .subscribe((data) => (quantite = data));
     return quantite;
   }

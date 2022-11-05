@@ -16,8 +16,6 @@ export class StatistiqueService {
   ) {}
 
   getStatistiqueById(id: number): Observable<Statistique> {
-    console.log('id to get perso stat', id);
-    console.log(this.http.get<Statistique>(this.url + `/${id}`));
     return this.http
       .get<Statistique>(this.url + `/${id}`)
       .pipe(catchError(this.handleError));
@@ -26,7 +24,6 @@ export class StatistiqueService {
   getEquipementStatistiqueByPersonnage(
     personnageId: number
   ): Observable<Statistique> {
-    console.log('get equipement stat by perso id');
     let equipements: Equipement[] = [];
     this.inventaireService
       .getEquipementsByPersonnageId(personnageId)
@@ -43,7 +40,6 @@ export class StatistiqueService {
   private getStatiqueByEquipement(
     equipements: Equipement[]
   ): Observable<Statistique> {
-    console.log('get statisique by equipement');
     let statTotal: Statistique = new Statistique();
     equipements.forEach((equipement) => {
       let statTemp: Statistique = new Statistique();

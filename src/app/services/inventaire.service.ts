@@ -13,39 +13,27 @@ export class InventaireService {
   inventaireEquipements: Equipement[] = [];
   constructor(private http: HttpClient) {}
 
-  addRessource(ressource: Ressource, id: number) {
-    console.log('api call: ' + this.url + '/ressources');
+  updateRessource(ressource: Ressource, id: number) {
     const body = { id: id, ressource: ressource };
     return this.http
       .post<any>(this.url + '/ressources', body)
       .pipe(catchError(this.handleError));
   }
 
-  removeRessource(ressource: Ressource): Observable<boolean> {
-    const index = this.inventaireRessources.findIndex(
-      (ressourceInventaire) => ressourceInventaire.nom === ressource.nom
-    );
-    if (index > -1) {
-      this.inventaireRessources[index].quantite -= ressource.quantite;
-      if (this.inventaireRessources[index].quantite <= 0) {
-        this.inventaireRessources.splice(index);
-      }
-    }
-    return of(true);
+  getInventaireRessource(
+    idPersonnage: number
+  ): Observable<[{ nom: string; quantite: number }]> {
+    return this.http
+      .get<[{ nom: string; quantite: number }]>(
+        this.url + `/ressources/personnage/${idPersonnage}`
+      )
+      .pipe(catchError(this.handleError));
   }
 
-  getInventaireRessource(): Observable<Ressource[]> {
-    return of(this.inventaireRessources);
-  }
-
-  getQuantite(ressource: Ressource): Observable<number> {
-    const index = this.inventaireRessources.findIndex(
-      (ressourceInventaire) => ressourceInventaire.nom === ressource.nom
-    );
-    if (index > -1) {
-      return of(this.inventaireRessources[index].quantite);
-    }
-    return of(0);
+  getQuantite(ressource: Ressource, id: number): Observable<number> {
+    return this.http
+      .get<number>(this.url + `/ressources/${ressource.id}/personnage/${id}`)
+      .pipe(catchError(this.handleError));
   }
 
   getEquipementsByPersonnageId(personnageId: number): Observable<Equipement[]> {

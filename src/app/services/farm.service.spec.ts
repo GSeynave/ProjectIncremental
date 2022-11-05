@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
 import { Statistique } from '../models/statistique';
 
 import { FarmService } from './farm.service';
@@ -15,13 +16,15 @@ describe('FarmService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should get degat total', () => {
+  fit('should get degat total', async () => {
     let personnageStatistique: Statistique = new Statistique();
     let monstreStatistique: Statistique = new Statistique();
     let spyService = spyOn(service, 'getDegat').and.returnValue(2);
-    expect(
-      service.getDegatInflige(personnageStatistique, monstreStatistique)
-    ).toBe(0.8);
+    const degatInflige: number = await service.getDegatInflige(
+      personnageStatistique,
+      monstreStatistique
+    );
+    expect(degatInflige).toBe(0.8);
     expect(spyService).toHaveBeenCalledTimes(4);
   });
 

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { SimpleChange } from '@angular/core';
 import {
   ComponentFixture,
@@ -22,11 +23,12 @@ import { FarmComponent } from './farm.component';
 describe('FarmComponent', () => {
   let component: FarmComponent;
   let fixture: ComponentFixture<FarmComponent>;
+  let http: HttpClient;
   let statistiqueService: StatistiqueService;
   let monstreService: MonstreService;
   let personnageStatistique: Statistique = new Statistique();
-  let ressourceService: RessourceService = new RessourceService();
-  let inventaireService: InventaireService = new InventaireService();
+  let ressourceService: RessourceService = new RessourceService(http);
+  let inventaireService: InventaireService = new InventaireService(http);
   let farmService: FarmService = new FarmService();
   beforeEach(async () => {
     await TestBed.configureTestingModule({

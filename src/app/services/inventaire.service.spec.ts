@@ -20,7 +20,7 @@ describe('InventaireRessourceService', () => {
   it('should add ressource in inventaire', () => {
     let ressource: Ressource = new Ressource();
     expect(service.inventaireRessources.includes(ressource)).toBe(false);
-    service.addRessource(ressource);
+    service.addRessource(ressource, 1);
     expect(service.inventaireRessources.includes(ressource)).toBe(true);
   });
 

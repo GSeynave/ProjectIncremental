@@ -18,8 +18,15 @@ export class InventaireComponent implements OnInit {
 
   ngOnInit(): void {
     this.interval = setInterval(() => {
-      this.inventaireService.getInventaireRessource().subscribe((data) => {
-        this.inventaireRessource = data;
+      // TODO fix perso id
+      this.inventaireService.getInventaireRessource(1).subscribe((data) => {
+        console.log('data', data);
+        data.forEach((res) => {
+          let ressource: Ressource = new Ressource();
+          ressource.nom = res.nom;
+          ressource.quantite = res.quantite;
+          this.inventaireRessource.push(ressource);
+        });
       });
       this.inventaireService.getInventaireEquipement().subscribe((data) => {
         this.inventaireEquipement = data;
